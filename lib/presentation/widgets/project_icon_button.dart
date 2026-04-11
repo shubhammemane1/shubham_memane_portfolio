@@ -22,7 +22,7 @@ class ProjectIconButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.sm),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
         child: FaIcon(icon, size: 16, color: AppColors.primary),
