@@ -112,7 +112,7 @@ class _ProjectCardState extends State<_ProjectCard> {
           ),
         );
       },
-      child: GestureDetector(
+      child: InkWell(
         onTap: () => context.go('/project/${widget.project.slug}'),
         child: TiltCard(
           maxTiltDegrees: 14,
