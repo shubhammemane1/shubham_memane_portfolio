@@ -14,27 +14,27 @@ void main() {
     longDescription: 'A longer description for testing.',
   );
 
-  Widget _wrap(Project project) {
+  Widget wrap(Project project) {
     final router = GoRouter(routes: [
-      GoRoute(path: '/', builder: (_, __) => ProjectDetailPage(project: project)),
+      GoRoute(path: '/', builder: (_, _) => ProjectDetailPage(project: project)),
     ]);
     return MaterialApp.router(routerConfig: router);
   }
 
   testWidgets('renders project title', (tester) async {
-    await tester.pumpWidget(_wrap(testProject));
+    await tester.pumpWidget(wrap(testProject));
     await tester.pump();
     expect(find.text('Test App'), findsWidgets);
   });
 
   testWidgets('renders longDescription', (tester) async {
-    await tester.pumpWidget(_wrap(testProject));
+    await tester.pumpWidget(wrap(testProject));
     await tester.pump();
     expect(find.text('A longer description for testing.'), findsOneWidget);
   });
 
   testWidgets('hides screenshots section when screenshots is empty', (tester) async {
-    await tester.pumpWidget(_wrap(testProject));
+    await tester.pumpWidget(wrap(testProject));
     await tester.pump();
     expect(find.text('Screenshots'), findsNothing);
   });
@@ -47,7 +47,7 @@ void main() {
       slug: 'test-app',
       screenshots: ['https://example.com/screen.png'],
     );
-    await tester.pumpWidget(_wrap(withScreenshots));
+    await tester.pumpWidget(wrap(withScreenshots));
     await tester.pump();
     expect(find.text('Screenshots'), findsOneWidget);
   });

@@ -152,7 +152,7 @@ class _Header extends StatelessWidget {
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) =>
+                                  errorBuilder: (_, _, _) =>
                                       _IconFallback(icon: project.icon),
                                 )
                               : Image.asset(
@@ -160,7 +160,7 @@ class _Header extends StatelessWidget {
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) =>
+                                  errorBuilder: (_, _, _) =>
                                       _IconFallback(icon: project.icon),
                                 ),
                         )
@@ -308,7 +308,7 @@ class _ScreenshotsSection extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: screenshots.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   const SizedBox(width: AppSpacing.md),
               itemBuilder: (_, index) => ClipRRect(
                 borderRadius: BorderRadius.circular(AppRadius.md),
@@ -317,7 +317,7 @@ class _ScreenshotsSection extends StatelessWidget {
                   width: 130,
                   height: 220,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
+                  errorBuilder: (_, _, _) => Container(
                     width: 130,
                     height: 220,
                     decoration: BoxDecoration(
