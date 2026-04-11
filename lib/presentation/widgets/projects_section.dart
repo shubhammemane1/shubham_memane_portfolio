@@ -6,6 +6,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/responsive.dart';
 import '../../domain/models/portfolio_data.dart';
+import 'project_icon_button.dart';
 import 'tilt_card.dart';
 
 class ProjectsSection extends StatefulWidget {
@@ -218,25 +219,25 @@ class _ProjectCardState extends State<_ProjectCard> {
                       runSpacing: AppSpacing.sm,
                       children: [
                         if (widget.project.githubUrl != null)
-                          _IconButton(
+                          ProjectIconButton(
                             icon: FontAwesomeIcons.github,
                             tooltip: 'GitHub',
                             onTap: () => _launchUrl(widget.project.githubUrl!),
                           ),
                         if (widget.project.liveUrl != null)
-                          _IconButton(
+                          ProjectIconButton(
                             icon: FontAwesomeIcons.arrowUpRightFromSquare,
                             tooltip: 'Live Demo',
                             onTap: () => _launchUrl(widget.project.liveUrl!),
                           ),
                         if (widget.project.playStoreUrl != null)
-                          _IconButton(
+                          ProjectIconButton(
                             icon: FontAwesomeIcons.googlePlay,
                             tooltip: 'Play Store',
                             onTap: () => _launchUrl(widget.project.playStoreUrl!),
                           ),
                         if (widget.project.appStoreUrl != null)
-                          _IconButton(
+                          ProjectIconButton(
                             icon: FontAwesomeIcons.appStoreIos,
                             tooltip: 'App Store',
                             onTap: () => _launchUrl(widget.project.appStoreUrl!),
@@ -279,33 +280,5 @@ class _ProjectCardState extends State<_ProjectCard> {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     }
-  }
-}
-
-class _IconButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-  final String? tooltip;
-
-  const _IconButton({required this.icon, required this.onTap, this.tooltip});
-
-  @override
-  Widget build(BuildContext context) {
-    final button = InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppRadius.sm),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.sm),
-        decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-        ),
-        child: FaIcon(icon, size: 16, color: AppColors.primary),
-      ),
-    );
-    if (tooltip != null) {
-      return Tooltip(message: tooltip!, child: button);
-    }
-    return button;
   }
 }
