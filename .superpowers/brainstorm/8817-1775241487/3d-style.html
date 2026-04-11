@@ -1,0 +1,136 @@
+<h2>What kind of 3D & motion style do you want?</h2>
+<p class="subtitle">Your portfolio is Flutter web with a dark theme (black + green). Pick the vibe that excites you most.</p>
+
+<style>
+  .cards { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+  .card { width: 300px; cursor: pointer; border-radius: 16px; overflow: hidden; background: #111; border: 2px solid #222; transition: border-color 0.2s; }
+  .card.selected { border-color: #10B981; }
+  .card-preview {
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 13px;
+    color: #aaa;
+  }
+  .card-body { padding: 16px; }
+  .card-body h3 { margin: 0 0 6px; color: #fff; font-size: 16px; }
+  .card-body p { margin: 0; color: #888; font-size: 13px; line-height: 1.5; }
+
+  /* Preview A - Parallax Depth */
+  .preview-a {
+    background: #000;
+    flex-direction: column;
+  }
+  .layer {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #10B98133;
+  }
+  .layer-1 { width: 200px; height: 200px; border-color: #10B98155; }
+  .layer-2 { width: 140px; height: 140px; border-color: #10B98188; animation: pulse 3s infinite; }
+  .layer-3 { width: 80px; height: 80px; background: #10B98122; border-color: #10B981; }
+  .mouse-icon { position: absolute; bottom: 12px; right: 12px; color: #10B98177; font-size: 11px; }
+  @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.08)} }
+
+  /* Preview B - 3D Card Tilt */
+  .preview-b {
+    background: linear-gradient(135deg, #0a0a0a, #111);
+    perspective: 400px;
+  }
+  .tilt-card {
+    width: 160px; height: 100px;
+    background: linear-gradient(135deg, #10B98122, #06B6D422);
+    border: 1px solid #10B98155;
+    border-radius: 12px;
+    transform: rotateY(-15deg) rotateX(10deg);
+    display: flex; align-items: center; justify-content: center;
+    color: #10B981; font-size: 12px; font-weight: 600;
+    box-shadow: 15px 15px 30px #00000077, inset 1px 1px 0 #10B98122;
+    transition: transform 0.3s;
+  }
+  .tilt-label { position: absolute; bottom: 12px; color: #666; font-size: 11px; }
+
+  /* Preview C - Floating Particles */
+  .preview-c {
+    background: #000;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #10B981;
+    animation: float 4s infinite ease-in-out;
+  }
+  .p1 { width:4px;height:4px; top:20%;left:20%; animation-delay:0s; opacity:0.7; }
+  .p2 { width:3px;height:3px; top:50%;left:60%; animation-delay:0.8s; opacity:0.5; }
+  .p3 { width:5px;height:5px; top:70%;left:35%; animation-delay:1.5s; opacity:0.6; }
+  .p4 { width:2px;height:2px; top:30%;left:75%; animation-delay:0.3s; opacity:0.4; }
+  .p5 { width:6px;height:6px; top:60%;left:15%; animation-delay:2s; opacity:0.3; }
+  .p6 { width:3px;height:3px; top:15%;left:50%; animation-delay:1s; opacity:0.8; }
+  .p7 { width:4px;height:4px; top:80%;left:70%; animation-delay:0.5s; opacity:0.5; }
+  .grid-line {
+    position: absolute; left: 0; right: 0;
+    height: 1px; background: linear-gradient(90deg, transparent, #10B98118, transparent);
+  }
+  .gl1 { top: 33%; }
+  .gl2 { top: 66%; }
+  .gc1 { position: absolute; top: 0; bottom: 0; width: 1px; left: 33%; background: linear-gradient(180deg, transparent, #10B98118, transparent); }
+  .gc2 { position: absolute; top: 0; bottom: 0; width: 1px; left: 66%; background: linear-gradient(180deg, transparent, #10B98118, transparent); }
+  .center-text { position: relative; z-index: 2; color: #10B981; font-size: 12px; font-weight: 600; text-align: center; text-shadow: 0 0 20px #10B981; }
+  @keyframes float {
+    0%,100%{ transform: translateY(0px) }
+    50%{ transform: translateY(-12px) }
+  }
+</style>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-preview preview-a">
+      <div class="layer layer-1"></div>
+      <div class="layer layer-2"></div>
+      <div class="layer layer-3"></div>
+      <span class="mouse-icon">🖱 move mouse to feel depth</span>
+    </div>
+    <div class="card-body">
+      <h3>A — Parallax Depth Layers</h3>
+      <p>Background elements move at different speeds as you move the mouse. Creates a subtle sense of 3D depth across the whole page. Elegant, professional feel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-preview preview-b">
+      <div class="tilt-card">Hover Me</div>
+      <span class="tilt-label">cards tilt toward cursor</span>
+    </div>
+    <div class="card-body">
+      <h3>B — 3D Tilt on Cards</h3>
+      <p>Project cards, skill cards, and sections tilt in 3D as the mouse moves over them — like a physical card reacting to light. Dramatic, tactile hover effect.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-preview preview-c">
+      <div class="grid-line gl1"></div>
+      <div class="grid-line gl2"></div>
+      <div class="gc1"></div>
+      <div class="gc2"></div>
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+      <div class="particle p4"></div>
+      <div class="particle p5"></div>
+      <div class="particle p6"></div>
+      <div class="particle p7"></div>
+      <div class="center-text">Shubham Memane</div>
+    </div>
+    <div class="card-body">
+      <h3>C — Immersive: Particles + Grid</h3>
+      <p>Floating glowing particles and a subtle tech-grid background that responds to mouse movement. Hero section feels like a futuristic HUD. Bold statement.</p>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center; color:#666; margin-top:24px; font-size:13px;">You can pick more than one — these can be combined. Click to select.</p>

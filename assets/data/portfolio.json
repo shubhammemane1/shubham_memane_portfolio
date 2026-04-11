@@ -1,0 +1,120 @@
+{
+  "personalInfo": {
+    "name": "Shubham Memane",
+    "title": "Full Stack Developer",
+    "bio": "Passionate developer with expertise in Flutter, Web, and Mobile development. I create beautiful, performant applications with clean code and modern architecture.",
+    "imageUrl": null
+  },
+  "skills": [
+    { "name": "Flutter",    "category": "Mobile",   "proficiency": 0.9  },
+    { "name": "Dart",       "category": "Language", "proficiency": 0.9  },
+    { "name": "React",      "category": "Web",      "proficiency": 0.85 },
+    { "name": "Node.js",    "category": "Backend",  "proficiency": 0.8  },
+    { "name": "Firebase",   "category": "Backend",  "proficiency": 0.85 },
+    { "name": "Git",        "category": "Tools",    "proficiency": 0.9  },
+    { "name": "UI/UX Design","category": "Design",  "proficiency": 0.75 },
+    { "name": "REST APIs",  "category": "Backend",  "proficiency": 0.85 }
+  ],
+  "projects": [
+    {
+      "title": "E-Commerce App",
+      "description": "Full-featured e-commerce mobile application with payment integration, real-time inventory, and admin dashboard.",
+      "technologies": ["Flutter", "Firebase", "Stripe", "Provider"],
+      "imageUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=w480-h960-rw",
+      "githubUrl": "https://github.com/yourusername/project1",
+      "liveUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=w480-h960-rw",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mobile&pcampaignid=web_share",
+      "appStoreUrl": "https://apps.apple.com/app/ecommerce/id000000001"
+
+    },
+    {
+      "title": "Task Management System",
+      "description": "Collaborative task management platform with real-time updates, team collaboration, and analytics.",
+      "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
+      "imageUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=w480-h960-rw",
+      "githubUrl": "https://github.com/yourusername/project2",
+      "liveUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=w480-h960-rw",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.example.tasks",
+      "appStoreUrl": null
+    },{
+      "title": "MO Trader",
+      "description": "Collaborative task management platform with real-time updates, team collaboration, and analytics.",
+      "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
+      "imageUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=w480-h960-rw",
+      "githubUrl": "https://github.com/yourusername/project2",
+      "liveUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=w480-h960-rw",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=mosl.powerapp.com&hl=en_IN",
+      "appStoreUrl": null,
+      "icon": "listCheck"
+    },
+    {
+      "title": "Weather App",
+      "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
+      "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
+      "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
+      "githubUrl": "https://github.com/yourusername/project3",
+      "liveUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
+      "playStoreUrl": null,
+      "appStoreUrl": "https://apps.apple.com/app/weather/id000000003",
+      "icon": "cloudSunRain"
+    },
+    {
+      "title": "Torus: Banking, Trading, Demat",
+      "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
+      "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
+      "imageUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=w480-h960-rw",
+      "githubUrl": "https://github.com/yourusername/project3",
+      "liveUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=w480-h960-rw",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.torus.digital&pcampaignid=web_share",
+      "appStoreUrl": "https://apps.apple.com/in/app/torus-banking-trading-demat/id6523421422",
+      "icon": "cloudSunRain"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Motilal Oswal",
+      "position": "Senior Flutter Developer",
+      "duration": "Sep 2025 - Present",
+      "description": "Leading mobile development initiatives, architecting scalable financial applications, and implementing best practices for secure trading platforms."
+    },
+    {
+      "company": "Torus Digital",
+      "position": "Flutter Developer",
+      "duration": "May 2025 - Sep 2025",
+      "description": "Developed cross-platform mobile applications, integrated third-party APIs, and optimized app performance for better user experience."
+    },
+    {
+      "company": "We3 Tech Works",
+      "position": "Flutter Developer",
+      "duration": "Oct 2023 - Apr 2025",
+      "description": "Built and maintained multiple Flutter applications, collaborated with cross-functional teams, and implemented modern UI/UX designs."
+    },
+    {
+      "company": "Codemines Solution Pvt Ltd",
+      "position": "Mobile App Developer",
+      "duration": "May 2023 - Oct 2023",
+      "description": "Developed native and hybrid mobile applications, integrated REST APIs, and worked on client projects with agile methodology."
+    },
+    {
+      "company": "Apexon",
+      "position": "Software Developer",
+      "duration": "Nov 2021 - Apr 2023",
+      "description": "Started professional journey developing enterprise applications, learned industry best practices, and contributed to large-scale projects."
+    }
+  ],
+  "education": [
+    {
+      "institution": "University Name",
+      "degree": "Bachelor of Computer Science",
+      "duration": "2016 - 2020"
+    }
+  ],
+  "contactInfo": {
+    "email": "shubham@example.com",
+    "phone": "+91 1234567890",
+    "github": "https://github.com/shubhammemane",
+    "linkedin": "https://linkedin.com/in/shubhammemane",
+    "twitter": "https://twitter.com/shubhammemane",
+    "website": null
+  }
+}

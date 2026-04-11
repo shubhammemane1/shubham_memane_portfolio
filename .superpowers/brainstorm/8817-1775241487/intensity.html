@@ -1,0 +1,133 @@
+<h2>How intense should the effects feel?</h2>
+<p class="subtitle">Both use all three effects (parallax + 3D tilt + particles). The difference is how bold they are.</p>
+
+<style>
+  .split { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+  .mockup { flex: 1; min-width: 280px; max-width: 420px; border-radius: 16px; overflow: hidden; cursor: pointer; border: 2px solid #222; transition: border-color 0.2s; background: #000; }
+  .mockup.selected { border-color: #10B981; }
+  .mockup-header { padding: 12px 16px; background: #111; color: #888; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .mockup-body { padding: 0; }
+
+  /* Subtle preview */
+  .subtle-hero {
+    height: 200px;
+    background: #050505;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    gap: 8px;
+  }
+  .subtle-particle { position: absolute; border-radius: 50%; background: #10B981; opacity: 0.25; }
+  .sp1 { width:3px;height:3px; top:25%;left:20%; animation: floatS 6s infinite ease-in-out; }
+  .sp2 { width:2px;height:2px; top:60%;left:70%; animation: floatS 8s infinite ease-in-out 1s; }
+  .sp3 { width:3px;height:3px; top:75%;left:30%; animation: floatS 7s infinite ease-in-out 2s; }
+  .subtle-grid { position: absolute; inset: 0; background-image: linear-gradient(#10B98108 1px, transparent 1px), linear-gradient(90deg, #10B98108 1px, transparent 1px); background-size: 40px 40px; }
+  .subtle-name { color: #fff; font-size: 20px; font-weight: 700; position: relative; }
+  .subtle-title { color: #10B981; font-size: 12px; position: relative; opacity: 0.8; }
+  .subtle-card {
+    margin: 12px; padding: 14px;
+    background: #0d0d0d; border-radius: 10px;
+    border: 1px solid #1a1a1a;
+    transform: perspective(600px) rotateY(-3deg) rotateX(1deg);
+    box-shadow: 4px 4px 12px #00000066;
+  }
+  .subtle-card-title { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .subtle-card-sub { color: #555; font-size: 11px; }
+  .subtle-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; background: #10B98112; color: #10B981; font-size: 10px; margin-top: 6px; }
+
+  /* Bold preview */
+  .bold-hero {
+    height: 200px;
+    background: #000;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    gap: 8px;
+  }
+  .bold-particle { position: absolute; border-radius: 50%; background: #10B981; }
+  .bp1 { width:6px;height:6px; top:20%;left:15%; animation: floatB 3s infinite ease-in-out; opacity:0.9; box-shadow: 0 0 8px #10B981; }
+  .bp2 { width:4px;height:4px; top:55%;left:72%; animation: floatB 4s infinite ease-in-out 0.5s; opacity:0.7; box-shadow: 0 0 6px #10B981; }
+  .bp3 { width:5px;height:5px; top:70%;left:25%; animation: floatB 3.5s infinite ease-in-out 1s; opacity:0.8; box-shadow: 0 0 10px #10B981; }
+  .bp4 { width:3px;height:3px; top:30%;left:65%; animation: floatB 5s infinite ease-in-out 0.2s; opacity:0.6; box-shadow: 0 0 5px #10B981; }
+  .bp5 { width:4px;height:4px; top:80%;left:55%; animation: floatB 3.8s infinite ease-in-out 1.5s; opacity:0.7; box-shadow: 0 0 7px #10B981; }
+  .bold-grid { position: absolute; inset: 0; background-image: linear-gradient(#10B98118 1px, transparent 1px), linear-gradient(90deg, #10B98118 1px, transparent 1px); background-size: 30px 30px; }
+  .bold-glow { position: absolute; width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, #10B98125 0%, transparent 70%); }
+  .bold-name { color: #fff; font-size: 20px; font-weight: 700; position: relative; text-shadow: 0 0 30px #10B98166; }
+  .bold-title { color: #10B981; font-size: 12px; position: relative; text-shadow: 0 0 15px #10B981; }
+  .bold-card {
+    margin: 12px; padding: 14px;
+    background: #0a0a0a; border-radius: 10px;
+    border: 1px solid #10B98133;
+    transform: perspective(400px) rotateY(-12deg) rotateX(5deg);
+    box-shadow: 12px 12px 30px #00000099, 0 0 20px #10B98115, inset 1px 1px 0 #10B98122;
+  }
+  .bold-card-title { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .bold-card-sub { color: #555; font-size: 11px; }
+  .bold-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; background: #10B98122; color: #10B981; font-size: 10px; margin-top: 6px; box-shadow: 0 0 6px #10B98133; }
+
+  @keyframes floatS { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  @keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+
+  .desc { padding: 12px 16px 16px; }
+  .desc p { color: #777; font-size: 12px; line-height: 1.6; margin: 0; }
+  .desc ul { color: #777; font-size: 12px; margin: 8px 0 0 0; padding-left: 16px; line-height: 1.8; }
+</style>
+
+<div class="split">
+  <div class="mockup" data-choice="subtle" onclick="toggleSelect(this)">
+    <div class="mockup-header">A — Subtle & Refined</div>
+    <div class="mockup-body">
+      <div class="subtle-hero">
+        <div class="subtle-grid"></div>
+        <div class="subtle-particle sp1"></div>
+        <div class="subtle-particle sp2"></div>
+        <div class="subtle-particle sp3"></div>
+        <div class="subtle-name">Shubham Memane</div>
+        <div class="subtle-title">Flutter Developer</div>
+      </div>
+      <div class="subtle-card">
+        <div class="subtle-card-title">Portfolio App</div>
+        <div class="subtle-card-sub">A beautiful cross-platform app built with Flutter</div>
+        <div class="subtle-tag">Flutter</div>
+      </div>
+    </div>
+    <div class="desc">
+      <ul>
+        <li>Mouse parallax: 5–8px max movement</li>
+        <li>Card tilt: 3–5° rotation</li>
+        <li>Particles: dim, slow, few</li>
+        <li>Feels: premium, calm, professional</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="bold" onclick="toggleSelect(this)">
+    <div class="mockup-header">B — Bold & Dramatic</div>
+    <div class="mockup-body">
+      <div class="bold-hero">
+        <div class="bold-grid"></div>
+        <div class="bold-glow"></div>
+        <div class="bold-particle bp1"></div>
+        <div class="bold-particle bp2"></div>
+        <div class="bold-particle bp3"></div>
+        <div class="bold-particle bp4"></div>
+        <div class="bold-particle bp5"></div>
+        <div class="bold-name">Shubham Memane</div>
+        <div class="bold-title">Flutter Developer</div>
+      </div>
+      <div class="bold-card">
+        <div class="bold-card-title">Portfolio App</div>
+        <div class="bold-card-sub">A beautiful cross-platform app built with Flutter</div>
+        <div class="bold-tag">Flutter</div>
+      </div>
+    </div>
+    <div class="desc">
+      <ul>
+        <li>Mouse parallax: 20–40px movement</li>
+        <li>Card tilt: 10–15° rotation + glow</li>
+        <li>Particles: bright, fast, glowing</li>
+        <li>Feels: futuristic, energetic, wow-factor</li>
+      </ul>
+    </div>
+  </div>
+</div>
