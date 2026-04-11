@@ -55,9 +55,11 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
     } catch (_) {}
   }
 
-  void _launch(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) await launchUrl(uri);
+  Future<void> _launch(String url) async {
+    try {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) await launchUrl(uri);
+    } catch (_) {}
   }
 
   @override
@@ -87,7 +89,6 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
               _ScreenshotsSection(screenshots: widget.project.screenshots),
             _AboutSection(
               text: widget.project.longDescription ?? widget.project.description,
-              isDark: isDark,
             ),
             _TechSection(technologies: widget.project.technologies),
             const _Footer(),
@@ -339,11 +340,11 @@ class _ScreenshotsSection extends StatelessWidget {
 
 class _AboutSection extends StatelessWidget {
   final String text;
-  final bool isDark;
-  const _AboutSection({required this.text, required this.isDark});
+  const _AboutSection({required this.text});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           AppSpacing.lg, AppSpacing.xl, AppSpacing.lg, 0),

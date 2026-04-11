@@ -283,9 +283,11 @@ class _ProjectCardState extends State<_ProjectCard> {
     );
   }
 
-  void _launchUrl(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    }
+  Future<void> _launchUrl(String url) async {
+    try {
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+      }
+    } catch (_) {}
   }
 }
