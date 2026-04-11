@@ -82,6 +82,9 @@ class Project {
   final String? playStoreUrl;
   final String? appStoreUrl;
   final IconData? icon;
+  final String slug;
+  final List<String> screenshots;
+  final String? longDescription;
 
   Project({
     required this.title,
@@ -93,11 +96,15 @@ class Project {
     this.playStoreUrl,
     this.appStoreUrl,
     this.icon,
+    required this.slug,
+    this.screenshots = const [],
+    this.longDescription,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
+    final title = json['title'] as String;
     return Project(
-      title: json['title'] as String,
+      title: title,
       description: json['description'] as String,
       technologies: (json['technologies'] as List<dynamic>).cast<String>(),
       imageUrl: json['imageUrl'] as String?,
@@ -106,22 +113,32 @@ class Project {
       playStoreUrl: json['playStoreUrl'] as String?,
       appStoreUrl: json['appStoreUrl'] as String?,
       icon: _iconFromString(json['icon'] as String?),
+      slug: json['slug'] as String? ?? _slugify(title),
+      screenshots: (json['screenshots'] as List<dynamic>?)?.cast<String>() ?? const [],
+      longDescription: json['longDescription'] as String?,
     );
+  }
+
+  static String _slugify(String title) {
+    return title
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9]+'), '-')
+        .replaceAll(RegExp(r'^-|-$'), '');
   }
 
   static IconData? _iconFromString(String? name) {
     switch (name) {
-      case 'cartShopping':    return FontAwesomeIcons.cartShopping;
-      case 'listCheck':       return FontAwesomeIcons.listCheck;
-      case 'cloudSunRain':    return FontAwesomeIcons.cloudSunRain;
-      case 'mobileScreen':    return FontAwesomeIcons.mobileScreen;
-      case 'globe':           return FontAwesomeIcons.globe;
-      case 'database':        return FontAwesomeIcons.database;
-      case 'robot':           return FontAwesomeIcons.robot;
-      case 'chartLine':       return FontAwesomeIcons.chartLine;
-      case 'lock':            return FontAwesomeIcons.lock;
-      case 'gamepad':         return FontAwesomeIcons.gamepad;
-      default:                return null;
+      case 'cartShopping':  return FontAwesomeIcons.cartShopping;
+      case 'listCheck':     return FontAwesomeIcons.listCheck;
+      case 'cloudSunRain':  return FontAwesomeIcons.cloudSunRain;
+      case 'mobileScreen':  return FontAwesomeIcons.mobileScreen;
+      case 'globe':         return FontAwesomeIcons.globe;
+      case 'database':      return FontAwesomeIcons.database;
+      case 'robot':         return FontAwesomeIcons.robot;
+      case 'chartLine':     return FontAwesomeIcons.chartLine;
+      case 'lock':          return FontAwesomeIcons.lock;
+      case 'gamepad':       return FontAwesomeIcons.gamepad;
+      default:              return null;
     }
   }
 }
