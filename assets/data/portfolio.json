@@ -18,56 +18,96 @@
   "projects": [
     {
       "title": "E-Commerce App",
+      "slug": "e-commerce-app",
       "description": "Full-featured e-commerce mobile application with payment integration, real-time inventory, and admin dashboard.",
+      "longDescription": "A comprehensive e-commerce solution built with Flutter and Firebase. Features include user authentication, product browsing with filters, cart management, Stripe payment integration, real-time inventory tracking, and a full admin dashboard for managing products, orders, and users. The app delivers a smooth shopping experience with offline support and push notifications for order updates.",
       "technologies": ["Flutter", "Firebase", "Stripe", "Provider"],
       "imageUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=w480-h960-rw",
       "githubUrl": "https://github.com/yourusername/project1",
-      "liveUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=w480-h960-rw",
+      "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mobile&pcampaignid=web_share",
-      "appStoreUrl": "https://apps.apple.com/app/ecommerce/id000000001"
-
+      "appStoreUrl": "https://apps.apple.com/app/ecommerce/id000000001",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
+      ]
     },
     {
       "title": "Task Management System",
+      "slug": "task-management-system",
       "description": "Collaborative task management platform with real-time updates, team collaboration, and analytics.",
+      "longDescription": "A real-time collaborative task management platform built with Flutter and Node.js. Teams can create projects, assign tasks, set deadlines, and track progress through an analytics dashboard. Features Socket.io for live updates, Kanban board view, priority queues, file attachments, and in-app notifications.",
       "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
       "imageUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=w480-h960-rw",
       "githubUrl": "https://github.com/yourusername/project2",
-      "liveUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=w480-h960-rw",
+      "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.example.tasks",
-      "appStoreUrl": null
-    },{
+      "appStoreUrl": null,
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
+      ]
+    },
+    {
       "title": "MO Trader",
-      "description": "Collaborative task management platform with real-time updates, team collaboration, and analytics.",
+      "slug": "mo-trader",
+      "description": "Professional trading platform with real-time market data and portfolio management.",
+      "longDescription": "MO Trader is a professional trading platform for Motilal Oswal, built with Flutter. It provides real-time market data, stock charting, portfolio management, and one-tap trading execution. Handles high-frequency data updates with optimized rendering, features a dark-themed trading UI, and integrates secure authentication with biometric support.",
       "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
       "imageUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=w480-h960-rw",
       "githubUrl": "https://github.com/yourusername/project2",
-      "liveUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=w480-h960-rw",
+      "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=mosl.powerapp.com&hl=en_IN",
       "appStoreUrl": null,
-      "icon": "listCheck"
+      "icon": "listCheck",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
+      ]
     },
     {
       "title": "Weather App",
+      "slug": "weather-app",
       "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
+      "longDescription": "A beautiful weather application built with Flutter using the OpenWeather API for accurate location-based forecasts, 7-day predictions, hourly breakdowns, and severe weather alerts. Google Maps integration shows interactive radar overlays. Features animated weather icons, widget support, and an Apple Watch companion app.",
       "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
       "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
       "githubUrl": "https://github.com/yourusername/project3",
-      "liveUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
+      "liveUrl": null,
       "playStoreUrl": null,
       "appStoreUrl": "https://apps.apple.com/app/weather/id000000003",
-      "icon": "cloudSunRain"
+      "icon": "cloudSunRain",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
+      ]
     },
     {
       "title": "Torus: Banking, Trading, Demat",
-      "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
+      "slug": "torus-banking-trading-demat",
+      "description": "All-in-one financial platform with banking, trading, and demat account management.",
+      "longDescription": "Torus is a comprehensive fintech application combining banking, stock trading, and demat account management in a single Flutter app. Features include UPI payments, mutual fund investments, IPO applications, equity trading with real-time quotes, account statements, and secure KYC onboarding. Available on both iOS and Android.",
       "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
       "imageUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=w480-h960-rw",
       "githubUrl": "https://github.com/yourusername/project3",
-      "liveUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=w480-h960-rw",
+      "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.torus.digital&pcampaignid=web_share",
       "appStoreUrl": "https://apps.apple.com/in/app/torus-banking-trading-demat/id6523421422",
-      "icon": "cloudSunRain"
+      "icon": "cloudSunRain",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
+      ]
     }
   ],
   "experiences": [
