@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -111,13 +112,15 @@ class _ProjectCardState extends State<_ProjectCard> {
           ),
         );
       },
-      child: TiltCard(
-        maxTiltDegrees: 14,
-        showShine: true,
-        perspective: 800,
-        hoverBorderColor: const Color(0x5510B981),
-        hoverGlowColor: const Color(0x2210B981),
-        child: SizedBox(
+      child: GestureDetector(
+        onTap: () => context.go('/project/${widget.project.slug}'),
+        child: TiltCard(
+          maxTiltDegrees: 14,
+          showShine: true,
+          perspective: 800,
+          hoverBorderColor: const Color(0x5510B981),
+          hoverGlowColor: const Color(0x2210B981),
+          child: SizedBox(
           width: Responsive.value(
               context, mobile: double.infinity, tablet: 350, desktop: 400),
           child: Column(
@@ -136,30 +139,33 @@ class _ProjectCardState extends State<_ProjectCard> {
                   ),
                 ),
                 child: Center(
-                  child: widget.project.imageUrl != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(22),
-                          child: widget.project.imageUrl!.startsWith('http')
-                              ? Image.network(
-                                  widget.project.imageUrl!,
-                                  width: 110,
-                                  height: 110,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, e, s) => _buildGradientFallback(),
-                                )
-                              : Image.asset(
-                                  widget.project.imageUrl!,
-                                  width: 110,
-                                  height: 110,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, e, s) => _buildGradientFallback(),
-                                ),
-                        )
-                      : FaIcon(
-                          widget.project.icon ?? FontAwesomeIcons.code,
-                          size: 64,
-                          color: Colors.white.withValues(alpha: 0.9),
-                        ),
+                  child: Hero(
+                    tag: 'project-icon-${widget.project.slug}',
+                    child: widget.project.imageUrl != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(22),
+                            child: widget.project.imageUrl!.startsWith('http')
+                                ? Image.network(
+                                    widget.project.imageUrl!,
+                                    width: 110,
+                                    height: 110,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, e, s) => _buildGradientFallback(),
+                                  )
+                                : Image.asset(
+                                    widget.project.imageUrl!,
+                                    width: 110,
+                                    height: 110,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, e, s) => _buildGradientFallback(),
+                                  ),
+                          )
+                        : FaIcon(
+                            widget.project.icon ?? FontAwesomeIcons.code,
+                            size: 64,
+                            color: Colors.white.withValues(alpha: 0.9),
+                          ),
+                  ),
                 ),
               ),
               Container(
@@ -249,6 +255,7 @@ class _ProjectCardState extends State<_ProjectCard> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
