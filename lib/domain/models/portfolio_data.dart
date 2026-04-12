@@ -84,7 +84,10 @@ class Project {
   final IconData? icon;
   final String slug;
   final List<String> screenshots;
+  final List<String> videos;
   final String? longDescription;
+  final double? rating;
+  final String? downloads;
 
   Project({
     required this.title,
@@ -98,7 +101,10 @@ class Project {
     this.icon,
     required this.slug,
     this.screenshots = const [],
+    this.videos = const [],
     this.longDescription,
+    this.rating,
+    this.downloads,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
@@ -115,7 +121,10 @@ class Project {
       icon: _iconFromString(json['icon'] as String?),
       slug: json['slug'] as String? ?? _slugify(title),
       screenshots: (json['screenshots'] as List<dynamic>?)?.cast<String>() ?? const [],
+      videos: (json['videos'] as List<dynamic>?)?.cast<String>() ?? const [],
       longDescription: json['longDescription'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
+      downloads: json['downloads'] as String?,
     );
   }
 
