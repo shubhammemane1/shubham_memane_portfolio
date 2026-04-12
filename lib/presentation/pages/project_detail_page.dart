@@ -5,6 +5,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/theme/app_theme.dart';
 import '../../domain/models/portfolio_data.dart';
+import '../widgets/media_section.dart';
 import '../widgets/project_icon_button.dart';
 
 class ProjectDetailPage extends StatefulWidget {
@@ -20,15 +21,21 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
   Color _gradientEnd = AppColors.accent;
 
   static const _fakeStats = <String, (String, String, String)>{
-    'e-commerce-app':              ('Shopping',     '50K+',  '4.7'),
-    'task-management-system':      ('Productivity', '20K+',  '4.5'),
+    'riise':                       ('Finance',      '500K+', '4.7'),
+    'mo-private-wealth':           ('Finance',      '50K+',  '4.5'),
     'mo-trader':                   ('Finance',      '100K+', '4.8'),
     'weather-app':                 ('Weather',      '30K+',  '4.6'),
     'torus-banking-trading-demat': ('Finance',      '80K+',  '4.9'),
   };
 
-  (String, String, String) get _stats =>
-      _fakeStats[widget.project.slug] ?? ('Utility', '10K+', '4.5');
+  (String, String, String) get _stats {
+    final fake = _fakeStats[widget.project.slug] ?? ('Utility', '10K+', '4.5');
+    final rating = widget.project.rating != null
+        ? widget.project.rating!.toStringAsFixed(1)
+        : fake.$3;
+    final downloads = widget.project.downloads ?? fake.$2;
+    return (fake.$1, downloads, rating);
+  }
 
   @override
   void initState() {
@@ -85,8 +92,11 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
               rating: rating,
               onLaunch: _launch,
             ),
-            if (widget.project.screenshots.isNotEmpty)
-              _ScreenshotsSection(screenshots: widget.project.screenshots),
+            if (widget.project.screenshots.isNotEmpty || widget.project.videos.isNotEmpty)
+              MediaSection(
+                screenshots: widget.project.screenshots,
+                videos: widget.project.videos,
+              ),
             _AboutSection(
               text: widget.project.longDescription ?? widget.project.description,
             ),
@@ -280,58 +290,6 @@ class _ActionBar extends StatelessWidget {
           _StatChip(label: '$rating ★'),
           _StatChip(label: downloads),
           _StatChip(label: category),
-        ],
-      ),
-    );
-  }
-}
-
-class _ScreenshotsSection extends StatelessWidget {
-  final List<String> screenshots;
-  const _ScreenshotsSection({required this.screenshots});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-          AppSpacing.lg, AppSpacing.xl, AppSpacing.lg, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Screenshots',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold)),
-          const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            height: 220,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: screenshots.length,
-              separatorBuilder: (_, _) =>
-                  const SizedBox(width: AppSpacing.md),
-              itemBuilder: (_, index) => ClipRRect(
-                borderRadius: BorderRadius.circular(AppRadius.md),
-                child: Image.network(
-                  screenshots[index],
-                  width: 130,
-                  height: 220,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => Container(
-                    width: 130,
-                    height: 220,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
-                    child: const Icon(Icons.image_not_supported,
-                        color: AppColors.primary),
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
