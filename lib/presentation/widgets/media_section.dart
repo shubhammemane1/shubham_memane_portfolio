@@ -40,7 +40,7 @@ class MediaSection extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: allMedia.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   const SizedBox(width: AppSpacing.md),
               itemBuilder: (context, index) => _MediaThumb(
                 item: allMedia[index],
@@ -97,7 +97,7 @@ class _MediaThumb extends StatelessWidget {
                       _posterUrl,
                       width: 260,
                       fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) => _placeholderBox(),
+                      errorBuilder: (_, _, _) => _placeholderBox(),
                     )
                   : _placeholderBox(),
               if (item.isVideo) ...[
