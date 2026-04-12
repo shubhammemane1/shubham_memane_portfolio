@@ -32,7 +32,7 @@ void _registerVideoView(String viewId, String url) {
   _registeredViewIds.add(viewId);
   ui_web.platformViewRegistry.registerViewFactory(viewId, (_) {
     if (_isYouTube(url)) {
-      final videoId = _extractYouTubeId(url) ?? '';
+      final videoId = extractYouTubeId(url) ?? '';
       return html.IFrameElement()
         ..src = 'https://www.youtube.com/embed/$videoId?autoplay=1'
         ..style.cssText = 'width:100%;height:100%;border:none;'
@@ -50,7 +50,7 @@ void _registerVideoView(String viewId, String url) {
 bool _isYouTube(String url) =>
     url.contains('youtube.com') || url.contains('youtu.be');
 
-String? _extractYouTubeId(String url) {
+String? extractYouTubeId(String url) {
   final uri = Uri.tryParse(url);
   if (uri == null) return null;
   if (uri.host.contains('youtu.be')) return uri.pathSegments.firstOrNull;
@@ -204,7 +204,7 @@ class _VideoViewerState extends State<_VideoViewer> {
   @override
   void initState() {
     super.initState();
-    _viewId = 'video-${widget.url.hashCode}';
+    _viewId = 'video-${widget.url.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_')}';
     _registerVideoView(_viewId, widget.url);
   }
 

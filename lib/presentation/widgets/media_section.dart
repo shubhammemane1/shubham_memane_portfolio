@@ -66,18 +66,11 @@ class _MediaThumb extends StatelessWidget {
 
   String get _posterUrl {
     if (!item.isVideo) return item.url;
-    final videoId = _extractYouTubeId(item.url);
+    final videoId = extractYouTubeId(item.url);
     if (videoId != null) {
       return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
     }
     return '';
-  }
-
-  static String? _extractYouTubeId(String url) {
-    final uri = Uri.tryParse(url);
-    if (uri == null) return null;
-    if (uri.host.contains('youtu.be')) return uri.pathSegments.firstOrNull;
-    return uri.queryParameters['v'];
   }
 
   @override
