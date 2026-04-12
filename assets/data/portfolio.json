@@ -6,108 +6,179 @@
     "imageUrl": null
   },
   "skills": [
-    { "name": "Flutter",    "category": "Mobile",   "proficiency": 0.9  },
-    { "name": "Dart",       "category": "Language", "proficiency": 0.9  },
-    { "name": "React",      "category": "Web",      "proficiency": 0.85 },
-    { "name": "Node.js",    "category": "Backend",  "proficiency": 0.8  },
-    { "name": "Firebase",   "category": "Backend",  "proficiency": 0.85 },
-    { "name": "Git",        "category": "Tools",    "proficiency": 0.9  },
-    { "name": "UI/UX Design","category": "Design",  "proficiency": 0.75 },
-    { "name": "REST APIs",  "category": "Backend",  "proficiency": 0.85 }
+    {
+      "name": "Flutter",
+      "category": "Mobile",
+      "proficiency": 0.9
+    },
+    {
+      "name": "Dart",
+      "category": "Language",
+      "proficiency": 0.9
+    },
+    {
+      "name": "React",
+      "category": "Web",
+      "proficiency": 0.85
+    },
+    {
+      "name": "Node.js",
+      "category": "Backend",
+      "proficiency": 0.8
+    },
+    {
+      "name": "Firebase",
+      "category": "Backend",
+      "proficiency": 0.85
+    },
+    {
+      "name": "Git",
+      "category": "Tools",
+      "proficiency": 0.9
+    },
+    {
+      "name": "UI/UX Design",
+      "category": "Design",
+      "proficiency": 0.75
+    },
+    {
+      "name": "REST APIs",
+      "category": "Backend",
+      "proficiency": 0.85
+    }
   ],
   "projects": [
     {
-      "title": "E-Commerce App",
-      "slug": "e-commerce-app",
-      "description": "Full-featured e-commerce mobile application with payment integration, real-time inventory, and admin dashboard.",
-      "longDescription": "A comprehensive e-commerce solution built with Flutter and Firebase. Features include user authentication, product browsing with filters, cart management, Stripe payment integration, real-time inventory tracking, and a full admin dashboard for managing products, orders, and users. The app delivers a smooth shopping experience with offline support and push notifications for order updates.",
-      "technologies": ["Flutter", "Firebase", "Stripe", "Provider"],
-      "imageUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=w480-h960-rw",
+      "title": "Riise",
+      "slug": "riise",
+      "description": "Know your portfolio with True Wealth. Invest via Demat Account with real-time market insights.",
+      "longDescription": "Riise by Motilal Oswal lets you track and grow your wealth with a True Wealth view of your entire portfolio. Invest in stocks, mutual funds, and IPOs through a seamlessly integrated Demat account. Features real-time market data, portfolio analytics, secure biometric login, and actionable investment insights to help you make smarter financial decisions.",
+      "technologies": [
+        "Flutter",
+        "Firebase",
+        "Dart",
+        "REST APIs"
+      ],
+      "imageUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=s512-rw",
       "githubUrl": "https://github.com/yourusername/project1",
       "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mobile&pcampaignid=web_share",
       "appStoreUrl": "https://apps.apple.com/app/ecommerce/id000000001",
       "screenshots": [
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
-      ]
+        "https://play-lh.googleusercontent.com/vmt5K2rdLCCCZMW8uPijoLF4UrLOWeoxQtw4Xy1eRoLx-IV2w1B8QOhFCso-l6KSFYGZ1l0AqLrhw6YkCb7P",
+        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA",
+        "https://play-lh.googleusercontent.com/FJOIblR_cxssqjfygtATX9Jge2o9DdYVwwN7X_lurDkTH4u2XgGRk0Q2iWBtjxFVfzOiFivljAcKXzf2PoGbOw",
+        "https://play-lh.googleusercontent.com/R_u5EAVngarrjJxh6SmBZYHvN7pDd_bVg2EYXdt1P4_mIR8f6EUvetZSd4dExHJkHba_1nrzo1OrKKc1PTLaLQ",
+        "https://play-lh.googleusercontent.com/Jkf_mxmQMxA-H0qFTJ2rnLr9Ycxn2tMpnoPGuIrOnbVm8Br-xFChsWr01I6Ui1DYX7f6QKAKx-u5b2bpHdAcew",
+        "https://play-lh.googleusercontent.com/ZeJpJ6Tm3lkgstgbrv7Vh24i4WngU2Idti3yIYVB2pQaUOJTe59G3lomcfBqzUl3XkRz64CyWF_sjto0KSupEcU"
+      ],
+      "videos": [],
+      "rating": 4.7,
+      "downloads": "500K+"
     },
     {
-      "title": "Task Management System",
-      "slug": "task-management-system",
-      "description": "Collaborative task management platform with real-time updates, team collaboration, and analytics.",
-      "longDescription": "A real-time collaborative task management platform built with Flutter and Node.js. Teams can create projects, assign tasks, set deadlines, and track progress through an analytics dashboard. Features Socket.io for live updates, Kanban board view, priority queues, file attachments, and in-app notifications.",
-      "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
-      "imageUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=w480-h960-rw",
+      "title": "MO Private Wealth",
+      "slug": "mo-private-wealth",
+      "description": "Exclusive wealth management platform for high-net-worth investors with personalised advisory and portfolio tracking.",
+      "longDescription": "MO Private Wealth is Motilal Oswal's premium wealth management app designed for high-net-worth individuals. Offers personalized investment advisory, portfolio performance tracking, estate planning tools, and direct access to relationship managers. Built with Flutter for a seamless cross-platform experience with enterprise-grade security.",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "REST APIs",
+        "Firebase"
+      ],
+      "imageUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=s512-rw",
       "githubUrl": "https://github.com/yourusername/project2",
       "liveUrl": null,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.example.tasks",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mopw&hl=en_IN",
       "appStoreUrl": null,
       "screenshots": [
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
-      ]
+        "https://play-lh.googleusercontent.com/6JuO9mPATveEhX7a2r4hJj6vqteLXIzU4NCqe0NaF2Fs3uj44eD0-XfRXcL6LrxO8x2ok1f_nRMWMM4c8VvUja8",
+        "https://play-lh.googleusercontent.com/Aq3g9GyfgYVpoYi9V3vK2IlwkIsT7PDFTYYmz9kaca6UcNazYWgIMvBrzc3gcQNfUEnRzVaXEYM2yt2Ko-HK",
+        "https://play-lh.googleusercontent.com/FF19zg-R9Sap5Xs7nRw_8lXrNeY-sMthN8vZINMwa3Sf_hisyXevIR3L1vxWKgMEbgHnKeGIHKUzgQnTU4vuk8c",
+        "https://play-lh.googleusercontent.com/lj4zgVpfOYZkAmea8Sx661EJEMYCJXn0nito6FjUMCVFsb7qN4TfvTZ1BwI2ekMU0A-niIUwDmjgPyG6cN9IFQ"
+      ],
+      "videos": [],
+      "rating": 4.5,
+      "downloads": "50K+"
     },
     {
       "title": "MO Trader",
       "slug": "mo-trader",
       "description": "Professional trading platform with real-time market data and portfolio management.",
       "longDescription": "MO Trader is a professional trading platform for Motilal Oswal, built with Flutter. It provides real-time market data, stock charting, portfolio management, and one-tap trading execution. Handles high-frequency data updates with optimized rendering, features a dark-themed trading UI, and integrates secure authentication with biometric support.",
-      "technologies": ["Flutter", "Node.js", "MongoDB", "Socket.io"],
-      "imageUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=w480-h960-rw",
+      "technologies": [
+        "Flutter",
+        "Node.js",
+        "MongoDB",
+        "Socket.io"
+      ],
+      "imageUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=s512-rw",
       "githubUrl": "https://github.com/yourusername/project2",
       "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=mosl.powerapp.com&hl=en_IN",
       "appStoreUrl": null,
       "icon": "listCheck",
       "screenshots": [
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
-      ]
+        "https://play-lh.googleusercontent.com/6_CcIutPNF1LqdvnNi1QiDnkM7bsAoSPYDID4FUU2-l29GOx_tY63HyefOEfI8i3mbA",
+        "https://play-lh.googleusercontent.com/9eC1Q-ylzxWKBqsDSIpNPe8jIlDZxTv0HQttTPxYRcZk56yw1-oKPzCtitN7Jq5-JA",
+        "https://play-lh.googleusercontent.com/iAjY2cfpk6FDPzT3nhwRxxyZrBPv2Vk9iHRSV8_9HEj1Ej7k_oODogCl4FfN63tG6ZXZ",
+        "https://play-lh.googleusercontent.com/jbLnMQIH1Mt6hmghOFxQnZXnQqVV7R00A29rHLwl5GHvyzXeMOnDsyxGpMxzZ3RwXB6W",
+        "https://play-lh.googleusercontent.com/lbVFYEmPZGN5wcWOCWksTQaxf37Js2kEZjkV7r8a5PLddiLiAzqvJ0oXkeknrFehfoEe",
+        "https://play-lh.googleusercontent.com/LiQG7p05OjLswZSyGv9zijvcR-1Gzu2-xULO9OfFujElFEWexv3wFSN-sRGM_erKPZ0J"
+      ],
+      "videos": [],
+      "rating": 4.8,
+      "downloads": "100K+"
     },
     {
       "title": "Weather App",
       "slug": "weather-app",
       "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
       "longDescription": "A beautiful weather application built with Flutter using the OpenWeather API for accurate location-based forecasts, 7-day predictions, hourly breakdowns, and severe weather alerts. Google Maps integration shows interactive radar overlays. Features animated weather icons, widget support, and an Apple Watch companion app.",
-      "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
+      "technologies": [
+        "Flutter",
+        "OpenWeather API",
+        "Google Maps"
+      ],
       "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
       "githubUrl": "https://github.com/yourusername/project3",
       "liveUrl": null,
       "playStoreUrl": null,
       "appStoreUrl": "https://apps.apple.com/app/weather/id000000003",
       "icon": "cloudSunRain",
-      "screenshots": [
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
-      ]
+      "screenshots": [],
+      "videos": [],
+      "rating": 4.6,
+      "downloads": "30K+"
     },
     {
       "title": "Torus: Banking, Trading, Demat",
       "slug": "torus-banking-trading-demat",
       "description": "All-in-one financial platform with banking, trading, and demat account management.",
       "longDescription": "Torus is a comprehensive fintech application combining banking, stock trading, and demat account management in a single Flutter app. Features include UPI payments, mutual fund investments, IPO applications, equity trading with real-time quotes, account statements, and secure KYC onboarding. Available on both iOS and Android.",
-      "technologies": ["Flutter", "OpenWeather API", "Google Maps"],
-      "imageUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=w480-h960-rw",
+      "technologies": [
+        "Flutter",
+        "OpenWeather API",
+        "Google Maps"
+      ],
+      "imageUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=s512-rw",
       "githubUrl": "https://github.com/yourusername/project3",
       "liveUrl": null,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.torus.digital&pcampaignid=web_share",
       "appStoreUrl": "https://apps.apple.com/in/app/torus-banking-trading-demat/id6523421422",
       "icon": "cloudSunRain",
       "screenshots": [
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw",
-        "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA=w5120-h2880-rw"
-      ]
+        "https://play-lh.googleusercontent.com/_7BRGCg4Bo_TkwH26rqdPJwn0j7Gj6bWOO-u63a1WrHfxw_JjaOqwABGNRK1sFI25Bk",
+        "https://play-lh.googleusercontent.com/-iXJd9PBZ6N4NsRwO1S_KXrkKR1NMZU0GWZySCJoCWsu7MoHXhzrLAdzp3QpD4HRJA",
+        "https://play-lh.googleusercontent.com/1dE4K86UosewvZURwE_Kpt1-ejOz0OkmJz5ooa7mjqwSc2v6Yj_reKlPlUjA-9eFUOw",
+        "https://play-lh.googleusercontent.com/428BYisVbkUtVcux7CYm5M7XnuoDlbNkDRB9ziwIYDCOniCf1T9PF_NVRKrZWC8DgC7u",
+        "https://play-lh.googleusercontent.com/5oOv8C0CXx9sdegpcXh8Geqb1wkebxdvQT_jMDvg-WQbghmRFwI57wEDqDdbRMDFqow",
+        "https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo"
+      ],
+      "videos": [],
+      "rating": 4.9,
+      "downloads": "80K+"
     }
   ],
   "experiences": [
