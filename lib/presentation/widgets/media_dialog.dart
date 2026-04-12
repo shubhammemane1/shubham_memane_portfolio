@@ -23,6 +23,8 @@ void showMediaDialog({
   );
 }
 
+// Intentionally never cleared: platformViewRegistry does not allow re-registering
+// the same viewId. Entries persist for the app lifetime (safe — portfolio has few videos).
 final _registeredViewIds = <String>{};
 
 void _registerVideoView(String viewId, String url) {
