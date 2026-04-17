@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Popup UI Designs</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0f1e; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 32px 24px; }
+
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: #f1f5f9; }
+  .sub { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+
+  .designs { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+  .design-col { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 260px; }
+  .design-label { font-size: 13px; font-weight: 700; color: #10b981; letter-spacing: 1px; text-transform: uppercase; }
+  .design-sub { font-size: 11px; color: #64748b; text-align: center; line-height: 1.5; max-width: 220px; }
+
+  /* ─── shared popup shell ─── */
+  .popup { border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+
+  /* ═══════════════════════════════════════
+     DESIGN A — Immersive Fullscreen
+  ═══════════════════════════════════════ */
+  .popup-a {
+    width: 240px;
+    background: #000;
+    position: relative;
+  }
+  .popup-a .img-area {
+    width: 100%; height: 380px;
+    background: linear-gradient(160deg,#1a3a6e 0%,#0c1f3a 60%,#071530 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .popup-a .img-area::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.35) 100%);
+  }
+  .popup-a .phone-mock {
+    width: 110px; height: 220px; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(135deg,#0f4c81,#071d35);
+    display: flex; flex-direction: column;
+  }
+  .popup-a .phone-mock .bar { height: 18px; background: rgba(255,255,255,0.05); display: flex; align-items: center; padding: 0 8px; gap: 4px; }
+  .popup-a .phone-mock .bar span { width: 5px; height: 5px; background: #10b981; border-radius: 50%; }
+  .popup-a .phone-mock .screen { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 8px; }
+  .popup-a .phone-mock .line { height: 7px; background: rgba(255,255,255,0.08); border-radius: 4px; }
+  .popup-a .phone-mock .line.w60 { width: 60%; }
+  .popup-a .phone-mock .line.w80 { width: 80%; }
+  .popup-a .phone-mock .line.w40 { width: 40%; }
+  .popup-a .phone-mock .chart { flex: 1; background: rgba(16,185,129,0.07); border-radius: 6px; border: 1px solid rgba(16,185,129,0.2); margin-top: 4px; }
+
+  .popup-a .close-btn {
+    position: absolute; top: 12px; right: 12px; z-index: 10;
+    width: 30px; height: 30px; background: rgba(255,255,255,0.12);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; backdrop-filter: blur(4px);
+  }
+  .popup-a .nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    width: 34px; height: 34px; background: rgba(255,255,255,0.12);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; backdrop-filter: blur(4px);
+  }
+  .popup-a .nav-btn.left { left: 10px; }
+  .popup-a .nav-btn.right { right: 10px; }
+  .popup-a .dots {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 5px; z-index: 10;
+  }
+  .popup-a .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .popup-a .dot.active { background: #10b981; width: 18px; border-radius: 3px; }
+
+  /* ═══════════════════════════════════════
+     DESIGN B — Gallery Strip
+  ═══════════════════════════════════════ */
+  .popup-b {
+    width: 240px;
+    background: #0f172a;
+  }
+  .popup-b .header {
+    padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .popup-b .header span { font-size: 11px; color: #64748b; }
+  .popup-b .header .x { width: 22px; height: 22px; background: #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px; }
+  .popup-b .main-img {
+    width: 100%; height: 320px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg,#1a3a6e,#071530);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .popup-b .main-img .phone-mock-b {
+    width: 110px; height: 220px; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(135deg,#0f4c81,#071d35);
+    display: flex; flex-direction: column;
+  }
+  .popup-b .nav-overlay {
+    position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events: none;
+  }
+  .popup-b .nav-side {
+    width: 36px; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.35), transparent);
+    display: flex; align-items: center; justify-content: center; pointer-events: all;
+  }
+  .popup-b .nav-side.right { background: linear-gradient(to left, rgba(0,0,0,0.35), transparent); }
+  .popup-b .nav-side span { color: rgba(255,255,255,0.7); font-size: 22px; }
+  .popup-b .thumb-strip {
+    background: #070d1a; padding: 8px 10px; display: flex; gap: 6px; overflow-x: auto;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .popup-b .thumb {
+    width: 38px; height: 64px; flex-shrink: 0; border-radius: 6px;
+    background: linear-gradient(135deg,#0f2040,#071530); border: 2px solid transparent; cursor: pointer;
+  }
+  .popup-b .thumb.active { border-color: #10b981; }
+
+  /* ═══════════════════════════════════════
+     DESIGN C — Minimal Clean
+  ═══════════════════════════════════════ */
+  .popup-c {
+    width: 240px;
+    background: #1e293b;
+  }
+  .popup-c .top-bar {
+    padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .popup-c .top-bar .counter {
+    font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.06);
+    padding: 3px 8px; border-radius: 10px;
+  }
+  .popup-c .top-bar .x {
+    width: 24px; height: 24px; background: rgba(255,255,255,0.08); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px;
+  }
+  .popup-c .img-area {
+    width: 100%; height: 320px; background: #0f172a;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .popup-c .img-area .phone-mock-c {
+    width: 110px; height: 220px; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(135deg,#0f4c81,#071d35);
+    display: flex; flex-direction: column;
+  }
+  .popup-c .bottom-bar {
+    padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .popup-c .nav-row { display: flex; gap: 8px; align-items: center; }
+  .popup-c .nav-icon {
+    width: 32px; height: 32px; background: rgba(16,185,129,0.1); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 16px;
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+  .popup-c .progress-dots { display: flex; gap: 4px; }
+  .popup-c .pdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .popup-c .pdot.active { background: #10b981; }
+
+  /* shared phone lines */
+  .pbar { height: 16px; background: rgba(255,255,255,0.04); display: flex; align-items: center; padding: 0 8px; gap: 3px; }
+  .pbar .pdot2 { width: 4px; height: 4px; background: #10b981; border-radius: 50%; }
+  .pscr { flex: 1; display: flex; flex-direction: column; gap: 7px; padding: 7px; }
+  .pl { height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; }
+  .pch { flex:1; background: rgba(16,185,129,0.06); border-radius: 5px; border:1px solid rgba(16,185,129,0.15); margin-top:4px; }
+</style>
+</head>
+<body>
+
+<h1>Screenshot Popup — All 3 Designs</h1>
+<p class="sub">Full detailed mockup of each option. Tell me which one you prefer or mix elements.</p>
+
+<div class="designs">
+
+  <!-- A -->
+  <div class="design-col">
+    <div class="design-label">Design A</div>
+    <div class="popup popup-a">
+      <div class="img-area">
+        <div class="phone-mock">
+          <div class="bar"><span></span></div>
+          <div class="screen">
+            <div class="line w60"></div>
+            <div class="line w80"></div>
+            <div class="line w40"></div>
+            <div class="chart"></div>
+          </div>
+        </div>
+        <div class="close-btn">✕</div>
+        <div class="nav-btn left">‹</div>
+        <div class="nav-btn right">›</div>
+        <div class="dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="design-sub">Immersive — image fills entire popup. Floating arrows + dot strip. No chrome. Pure image focus.</div>
+  </div>
+
+  <!-- B -->
+  <div class="design-col">
+    <div class="design-label">Design B</div>
+    <div class="popup popup-b">
+      <div class="header">
+        <span>Screenshot 1 / 8</span>
+        <div class="x">✕</div>
+      </div>
+      <div class="main-img">
+        <div class="phone-mock-b">
+          <div class="pbar"><div class="pdot2"></div></div>
+          <div class="pscr">
+            <div class="pl" style="width:55%"></div>
+            <div class="pl" style="width:75%"></div>
+            <div class="pl" style="width:40%"></div>
+            <div class="pch"></div>
+          </div>
+        </div>
+        <div class="nav-overlay">
+          <div class="nav-side"><span>‹</span></div>
+          <div class="nav-side right"><span>›</span></div>
+        </div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb active"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+      </div>
+    </div>
+    <div class="design-sub">Gallery strip — thumbnail row at bottom to jump directly. Counter in header. Subtle edge arrows.</div>
+  </div>
+
+  <!-- C -->
+  <div class="design-col">
+    <div class="design-label">Design C</div>
+    <div class="popup popup-c">
+      <div class="top-bar">
+        <div class="counter">2 / 8</div>
+        <div class="x">✕</div>
+      </div>
+      <div class="img-area">
+        <div class="phone-mock-c">
+          <div class="pbar"><div class="pdot2"></div></div>
+          <div class="pscr">
+            <div class="pl" style="width:55%"></div>
+            <div class="pl" style="width:75%"></div>
+            <div class="pl" style="width:40%"></div>
+            <div class="pch"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="nav-row">
+          <div class="nav-icon">‹</div>
+          <div class="nav-icon">›</div>
+        </div>
+        <div class="progress-dots">
+          <div class="pdot active"></div>
+          <div class="pdot"></div>
+          <div class="pdot active"></div>
+          <div class="pdot"></div>
+          <div class="pdot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="design-sub">Minimal clean — counter pill top-left, prev/next buttons in a footer bar. Dots show position. Structured layout.</div>
+  </div>
+
+</div>
+
+<p style="margin-top:32px;font-size:12px;color:#475569;text-align:center;">Tell me which you like — or mix: e.g. "A's immersive image but B's thumbnail strip"</p>
+
+</body>
+</html>

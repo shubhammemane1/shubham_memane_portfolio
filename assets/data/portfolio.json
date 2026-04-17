@@ -49,10 +49,10 @@
   ],
   "projects": [
     {
-      "title": "Riise",
+      "title": "MO RIISE: Stocks, IPO & Demat",
       "slug": "riise",
-      "description": "Know your portfolio with True Wealth. Invest via Demat Account with real-time market insights.",
-      "longDescription": "Riise by Motilal Oswal lets you track and grow your wealth with a True Wealth view of your entire portfolio. Invest in stocks, mutual funds, and IPOs through a seamlessly integrated Demat account. Features real-time market data, portfolio analytics, secure biometric login, and actionable investment insights to help you make smarter financial decisions.",
+      "description": "All-in-one stock market app for demat, IPO, mutual funds and US stocks by Motilal Oswal. Trusted by 40L+ investors.",
+      "longDescription": "MO RIISE is Motilal Oswal's flagship investment app for stocks, IPO, mutual funds, F&O, and US stocks. Open a 100% paperless demat account in under 15 minutes. Trade 6,000+ stocks on NSE & BSE with ultra-fast execution, multiple order types, and integrated TradingView charts with RSI, MACD, and Bollinger Bands. Apply for IPOs early, invest in 250+ mutual funds, and trade US stocks with fractional shares from $1. Track your entire portfolio including holdings from other brokers via Account Aggregator. Get expert research on 260+ stocks, daily recommendations, and join StoCoMo — the in-app trading community for live market discussions.",
       "technologies": [
         "Flutter",
         "Firebase",
@@ -60,17 +60,19 @@
         "REST APIs"
       ],
       "imageUrl": "https://play-lh.googleusercontent.com/mYmcPxQifEvJcqxLoGLGvIOLk9OmuFmKNEvK3ruWdr6d8smfExlZ0VcDghdPzTAV6DjyYU5H935WF7hRdXfr_u4=s512-rw",
-      "githubUrl": "https://github.com/yourusername/project1",
+      "githubUrl": null,
       "liveUrl": null,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mobile&pcampaignid=web_share",
-      "appStoreUrl": "https://apps.apple.com/app/ecommerce/id000000001",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mobile",
+      "appStoreUrl": "https://apps.apple.com/in/app/riise-stocks-by-motilal-oswal/id1055577451",
       "screenshots": [
         "https://play-lh.googleusercontent.com/vmt5K2rdLCCCZMW8uPijoLF4UrLOWeoxQtw4Xy1eRoLx-IV2w1B8QOhFCso-l6KSFYGZ1l0AqLrhw6YkCb7P",
         "https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA",
         "https://play-lh.googleusercontent.com/FJOIblR_cxssqjfygtATX9Jge2o9DdYVwwN7X_lurDkTH4u2XgGRk0Q2iWBtjxFVfzOiFivljAcKXzf2PoGbOw",
         "https://play-lh.googleusercontent.com/R_u5EAVngarrjJxh6SmBZYHvN7pDd_bVg2EYXdt1P4_mIR8f6EUvetZSd4dExHJkHba_1nrzo1OrKKc1PTLaLQ",
         "https://play-lh.googleusercontent.com/Jkf_mxmQMxA-H0qFTJ2rnLr9Ycxn2tMpnoPGuIrOnbVm8Br-xFChsWr01I6Ui1DYX7f6QKAKx-u5b2bpHdAcew",
-        "https://play-lh.googleusercontent.com/ZeJpJ6Tm3lkgstgbrv7Vh24i4WngU2Idti3yIYVB2pQaUOJTe59G3lomcfBqzUl3XkRz64CyWF_sjto0KSupEcU"
+        "https://play-lh.googleusercontent.com/ZeJpJ6Tm3lkgstgbrv7Vh24i4WngU2Idti3yIYVB2pQaUOJTe59G3lomcfBqzUl3XkRz64CyWF_sjto0KSupEcU",
+        "https://play-lh.googleusercontent.com/9DTT2cq0DNWuG80atbrzdCgIFOgiPOSEvzdN_XHQCq9aV2VvZs96LvK3pVqF53RTOv0ec2_uDH9U038z0ZY70Q",
+        "https://play-lh.googleusercontent.com/lpJJmtAlqjNiPC09yeqxKAZNChkxyLkXFBtEEtlkbwejVXRNs80bMd0DX7eUWEWWjG61RU7IIaXg2wQB_IGMwg"
       ],
       "videos": [],
       "rating": 4.7,
@@ -79,8 +81,8 @@
     {
       "title": "MO Private Wealth",
       "slug": "mo-private-wealth",
-      "description": "Exclusive wealth management platform for high-net-worth investors with personalised advisory and portfolio tracking.",
-      "longDescription": "MO Private Wealth is Motilal Oswal's premium wealth management app designed for high-net-worth individuals. Offers personalized investment advisory, portfolio performance tracking, estate planning tools, and direct access to relationship managers. Built with Flutter for a seamless cross-platform experience with enterprise-grade security.",
+      "description": "Premium wealth management app for high-net-worth investors by Motilal Oswal with personalised advisory and portfolio tracking.",
+      "longDescription": "MO Private Wealth is Motilal Oswal's exclusive app designed for high-net-worth individuals seeking personalised wealth management. Get dedicated relationship manager access, curated investment advisory across equity, debt, and alternative assets, and a comprehensive view of your entire portfolio performance. The app provides detailed analytics, goal-based planning, and secure communication with your wealth advisor — all in one place.",
       "technologies": [
         "Flutter",
         "Dart",
@@ -88,9 +90,9 @@
         "Firebase"
       ],
       "imageUrl": "https://play-lh.googleusercontent.com/0RQBmvs1OZjQRTdCEuBoaK-teNXGmvg9T3TVsQjMD44IDUg4PmgcC1RMmq0C2M2D7sqw-tuQLvTIpTvMwZov=s512-rw",
-      "githubUrl": "https://github.com/yourusername/project2",
+      "githubUrl": null,
       "liveUrl": null,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mopw&hl=en_IN",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mosl.mopw",
       "appStoreUrl": null,
       "screenshots": [
         "https://play-lh.googleusercontent.com/6JuO9mPATveEhX7a2r4hJj6vqteLXIzU4NCqe0NaF2Fs3uj44eD0-XfRXcL6LrxO8x2ok1f_nRMWMM4c8VvUja8",
@@ -103,20 +105,20 @@
       "downloads": "50K+"
     },
     {
-      "title": "MO Trader",
+      "title": "MO Trader: Stock Trading App",
       "slug": "mo-trader",
-      "description": "Professional trading platform with real-time market data and portfolio management.",
-      "longDescription": "MO Trader is a professional trading platform for Motilal Oswal, built with Flutter. It provides real-time market data, stock charting, portfolio management, and one-tap trading execution. Handles high-frequency data updates with optimized rendering, features a dark-themed trading UI, and integrates secure authentication with biometric support.",
+      "description": "Fast and powerful stock trading app with real-time market data, advanced charting, and seamless order execution by Motilal Oswal.",
+      "longDescription": "MO Trader is Motilal Oswal's dedicated stock trading app built for active traders. Execute trades in real time across NSE and BSE with advanced order types including market, limit, stop-loss, and bracket orders. Access live market depth, real-time option chains with Greeks, intraday and positional charts, and portfolio P&L tracking. Designed with a high-performance UI that handles rapid data updates with minimal latency — ideal for intraday traders and F&O professionals.",
       "technologies": [
         "Flutter",
-        "Node.js",
-        "MongoDB",
-        "Socket.io"
+        "Dart",
+        "REST APIs",
+        "WebSocket"
       ],
       "imageUrl": "https://play-lh.googleusercontent.com/sdTW65mkcT7OaG6Rq_tpZcO8eslU1kWsI6saA773XR0rrxJaGIG2UeCGW8cS6PLfeg=s512-rw",
-      "githubUrl": "https://github.com/yourusername/project2",
+      "githubUrl": null,
       "liveUrl": null,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=mosl.powerapp.com&hl=en_IN",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=mosl.powerapp.com",
       "appStoreUrl": null,
       "icon": "listCheck",
       "screenshots": [
@@ -125,7 +127,9 @@
         "https://play-lh.googleusercontent.com/iAjY2cfpk6FDPzT3nhwRxxyZrBPv2Vk9iHRSV8_9HEj1Ej7k_oODogCl4FfN63tG6ZXZ",
         "https://play-lh.googleusercontent.com/jbLnMQIH1Mt6hmghOFxQnZXnQqVV7R00A29rHLwl5GHvyzXeMOnDsyxGpMxzZ3RwXB6W",
         "https://play-lh.googleusercontent.com/lbVFYEmPZGN5wcWOCWksTQaxf37Js2kEZjkV7r8a5PLddiLiAzqvJ0oXkeknrFehfoEe",
-        "https://play-lh.googleusercontent.com/LiQG7p05OjLswZSyGv9zijvcR-1Gzu2-xULO9OfFujElFEWexv3wFSN-sRGM_erKPZ0J"
+        "https://play-lh.googleusercontent.com/LiQG7p05OjLswZSyGv9zijvcR-1Gzu2-xULO9OfFujElFEWexv3wFSN-sRGM_erKPZ0J",
+        "https://play-lh.googleusercontent.com/SELgUwiD61-Rd4NagBvFaeVL_lTXOKeQnSuEkxhCd1fHa83ct5F_kitUuencreQGnw3v",
+        "https://play-lh.googleusercontent.com/QdUYOBNCnqEmxnA4nPj0fS_RQIDSuHwS_lRlZCz6tQGwKpCeHjoGZ2a-p56HNC4Q_sjH"
       ],
       "videos": [],
       "rating": 4.8,
@@ -155,26 +159,52 @@
     {
       "title": "Torus: Banking, Trading, Demat",
       "slug": "torus-banking-trading-demat",
-      "description": "All-in-one financial platform with banking, trading, and demat account management.",
-      "longDescription": "Torus is a comprehensive fintech application combining banking, stock trading, and demat account management in a single Flutter app. Features include UPI payments, mutual fund investments, IPO applications, equity trading with real-time quotes, account statements, and secure KYC onboarding. Available on both iOS and Android.",
+      "description": "All-in-one fintech app combining digital banking, stock trading, and demat account management by Torus Digital.",
+      "longDescription": "Torus is a comprehensive fintech platform that brings together digital banking, equity trading, and demat account management in one seamless Flutter app. Open a zero-paperwork demat account, invest in stocks on NSE & BSE with real-time quotes and order execution, apply for IPOs, and manage mutual fund investments. Banking features include UPI payments, fund transfers, account statements, and fixed deposits. Secure KYC onboarding lets you get started quickly while built-in portfolio tracking and P&L reports give you a complete picture of your investments. Available on both Android and iOS.",
       "technologies": [
         "Flutter",
-        "OpenWeather API",
-        "Google Maps"
+        "Dart",
+        "REST APIs",
+        "Firebase"
       ],
       "imageUrl": "https://play-lh.googleusercontent.com/86EGsZORy_B4u4rw3o3qACNbTONQ0ju6ah6Bobrd89-VCcwm9_Pff_vAuBpm7IG0jgg=s512-rw",
-      "githubUrl": "https://github.com/yourusername/project3",
+      "githubUrl": null,
       "liveUrl": null,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.torus.digital&pcampaignid=web_share",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.torus.digital",
       "appStoreUrl": "https://apps.apple.com/in/app/torus-banking-trading-demat/id6523421422",
-      "icon": "cloudSunRain",
       "screenshots": [
+        "https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo",
+        "https://play-lh.googleusercontent.com/HkuZPQcXXLJC0FxFRRmONBofPleeKHyWlc7pKGDcn4dozuLwCsOMGetJGWQZ8qtVAQM",
+        "https://play-lh.googleusercontent.com/7WyqTUce83KP8bE7ringdxdWnYFLdhVfd02KPzATuLFt4xv7B-PNKopLzGg4Qn69w9Li",
+        "https://play-lh.googleusercontent.com/Kd40J51_kbz6YryC8njf4hA5Yk8n_uRBXYyK-HDsqYbFi6JNDTK_8L5lf6z-NLsYLg4",
+        "https://play-lh.googleusercontent.com/RfAHnQ2IBQBu3mmpMo-0f514GEyHCYp0bf1Axr-k16CC61xnSOglkix4crSuycVZVKgB",
         "https://play-lh.googleusercontent.com/_7BRGCg4Bo_TkwH26rqdPJwn0j7Gj6bWOO-u63a1WrHfxw_JjaOqwABGNRK1sFI25Bk",
-        "https://play-lh.googleusercontent.com/-iXJd9PBZ6N4NsRwO1S_KXrkKR1NMZU0GWZySCJoCWsu7MoHXhzrLAdzp3QpD4HRJA",
+        "https://play-lh.googleusercontent.com/sf712ZKRVoRjQ59U_XgZG-K2mrE2NePTaqaUk4jaQNKq0UtkYrhwZI4outqgH8fgwQ",
+        "https://play-lh.googleusercontent.com/NvOiuysUYdClFhhImfg4taVyEf7qzsCSIwjn9cpH0yIjjOjY2k_6DvNW_cXI-tNj-zQB",
+        "https://play-lh.googleusercontent.com/ZpJrFqDr4-j7tyb_gw8_7eePO9beBFeTWl2ckBlxhggUDuBztnnDZmObRO6CTlhGhmrF",
+        "https://play-lh.googleusercontent.com/pVCPzHNxykimwyiBAyaIdMRyzIAweKnhNYxL5KM0F3BzPJahUoXOHzTa0Oukud3A3fJr",
+        "https://play-lh.googleusercontent.com/Hc1HUpj23yXpFIi8G5CqoQgPr9Yu0cdFXsE0anZI3cK1RJC8rSNdhFgjWklS3E8J66Ev",
+        "https://play-lh.googleusercontent.com/oeseLfnAdH6apo8jhfobka75Ki6znQF7zxkbURGxYzJZcXlGSH3KMeQINS66xDznuC2m",
+        "https://play-lh.googleusercontent.com/Oo8ksdvn26zHfS3FjkgFTZt6NHeHU1XlyvrK1KGLE0YuyalgN2BWKZfYvu1i2eWUGyw",
+        "https://play-lh.googleusercontent.com/og-liLkks8Cd6JEGXSGPlDWkUexVaERO7bo2G8ppuToJUDmAT0zU2H2d9XKMcLg01w",
+        "https://play-lh.googleusercontent.com/ChCTTP6GeXLuG3CZDI4D95mtm_slNIB6EmKYxqAqTO7ZKigjAwGpeGivwlndZ8D2Ln4",
+        "https://play-lh.googleusercontent.com/w_nDf9op6qxvq7lc-_CTJkkvSUlzSBovF9g3keKItjODw-q67BG2EKCHvfGzmgr8Fso",
+        "https://play-lh.googleusercontent.com/kHCf-UdmRu1uz2ozGm4RWBpV84FOqMa6lZPmQrCkZYkvhCS6u2YSLOKUe25jx9P2lA",
+        "https://play-lh.googleusercontent.com/sThkKt5uZbDZ6yyUaARUiY4_ygJawNLOS9rqH3WqAmo1lX5hFkjlRCOFeLE2TiCN0Dzq",
+        "https://play-lh.googleusercontent.com/YblxmGCVglFq1-OffSYdleJBm9yMJDKwX9z3ZHGSm_CWy3XcrBa7puoZIxEMHjbJiis",
+        "https://play-lh.googleusercontent.com/Cjg7U3qQYktVNduqT4tSxuqMgi_MdmT9KeLRrEjR7AZvO-EPi6bXKPiOizugDqwgoA",
         "https://play-lh.googleusercontent.com/1dE4K86UosewvZURwE_Kpt1-ejOz0OkmJz5ooa7mjqwSc2v6Yj_reKlPlUjA-9eFUOw",
-        "https://play-lh.googleusercontent.com/428BYisVbkUtVcux7CYm5M7XnuoDlbNkDRB9ziwIYDCOniCf1T9PF_NVRKrZWC8DgC7u",
+        "https://play-lh.googleusercontent.com/vFp9opmqBVh_EqV-ZBvaNU4E3n-DnPm4Mj9Z39FO0TzCCE__jWtd4xJbZgiNwAvhRp6z",
+        "https://play-lh.googleusercontent.com/OLQIkbnbYJNP5q-Fsf3AUBzS0knJ3_mDENdX6M1Usc9aG82-iZlwcOpiRhtl7geJxYG4",
         "https://play-lh.googleusercontent.com/5oOv8C0CXx9sdegpcXh8Geqb1wkebxdvQT_jMDvg-WQbghmRFwI57wEDqDdbRMDFqow",
-        "https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo"
+        "https://play-lh.googleusercontent.com/XdEffLMDGEV6-ndAbLLOl6P4paiM3THlvdkoegonn00FyDaHyWysnsVfbD53kaL0bQ",
+        "https://play-lh.googleusercontent.com/Vgq1JDjl4ATU0YOWMvrzJHZka6qJuyf-1JrKWhieryZG-3yQfduyWJoRSmwnVNWlMzuh",
+        "https://play-lh.googleusercontent.com/-iXJd9PBZ6N4NsRwO1S_KXrkKR1NMZU0GWZySCJoCWsu7MoHXhzrLAdzp3QpD4HRJA",
+        "https://play-lh.googleusercontent.com/TD2AbvG3h10_7LmSmMOmLHy57y7KG5wNOvHrdrtLQSNSmMOFRWTfwMn39467UpNKpac",
+        "https://play-lh.googleusercontent.com/ymIVp3LyCjTkjGyC9GLZDXdBjBLPQBv3S3jxPW9yDor-nZHo4qwpk5qS6DdxwX739Q",
+        "https://play-lh.googleusercontent.com/r4vK4I9xouM9pMqeA6rL7YDZcbtK_8OxmB_tDTK6sM4pG9CS0R3RRYjMDvvTWITTU2c",
+        "https://play-lh.googleusercontent.com/piIVXUkj1cYMGs870DXA1DY7GtzPOKzp_QTKdRYFeIp5lTQBTKsE9pHN63oM3hQgZ3s",
+        "https://play-lh.googleusercontent.com/428BYisVbkUtVcux7CYm5M7XnuoDlbNkDRB9ziwIYDCOniCf1T9PF_NVRKrZWC8DgC7u"
       ],
       "videos": [],
       "rating": 4.9,

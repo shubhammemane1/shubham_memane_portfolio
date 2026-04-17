@@ -1,0 +1,87 @@
+<h2>Screenshot Popup — Which style?</h2>
+<p class="subtitle">Three directions for the media viewer popup. Click to select your preference.</p>
+
+<div class="cards">
+
+  <!-- Option A: Immersive fullscreen -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a;padding:16px;border-radius:8px;">
+      <div style="position:relative;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:9/18;max-height:300px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+        <!-- fake phone screenshot -->
+        <div style="background:linear-gradient(135deg,#1e3a5f,#0f2040);width:100%;height:100%;display:flex;flex-direction:column;">
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:11px;">📱 Screenshot</div>
+        </div>
+        <!-- left arrow -->
+        <div style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;">‹</div>
+        <!-- right arrow -->
+        <div style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;">›</div>
+        <!-- close -->
+        <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;">✕</div>
+        <!-- counter dots -->
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;">
+          <div style="width:6px;height:6px;background:#10b981;border-radius:50%;"></div>
+          <div style="width:6px;height:6px;background:rgba(255,255,255,0.3);border-radius:50%;"></div>
+          <div style="width:6px;height:6px;background:rgba(255,255,255,0.3);border-radius:50%;"></div>
+          <div style="width:6px;height:6px;background:rgba(255,255,255,0.3);border-radius:50%;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Immersive</h3>
+      <p>Full-screen dark scrim. Image fills the dialog with floating prev/next arrows on the sides. Dot indicator at the bottom. Close button top-right. Clean, app-like feel.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Gallery with thumbnail strip -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f172a;padding:16px;border-radius:8px;">
+      <div style="background:#0f172a;border-radius:10px;overflow:hidden;max-height:300px;">
+        <!-- main image area -->
+        <div style="background:linear-gradient(135deg,#1e3a5f,#0f2040);aspect-ratio:9/16;max-height:220px;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:11px;position:relative;">
+          <span>📱 Screenshot</span>
+          <div style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.15);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;">✕</div>
+          <div style="position:absolute;top:8px;left:8px;color:rgba(255,255,255,0.5);font-size:11px;">2 / 8</div>
+        </div>
+        <!-- thumbnail strip -->
+        <div style="background:#0a0f1e;padding:8px;display:flex;gap:6px;overflow-x:auto;">
+          <div style="width:40px;height:70px;flex-shrink:0;background:#1e3a5f;border-radius:5px;border:2px solid #10b981;"></div>
+          <div style="width:40px;height:70px;flex-shrink:0;background:#0f2040;border-radius:5px;opacity:0.5;"></div>
+          <div style="width:40px;height:70px;flex-shrink:0;background:#0f2040;border-radius:5px;opacity:0.5;"></div>
+          <div style="width:40px;height:70px;flex-shrink:0;background:#0f2040;border-radius:5px;opacity:0.5;"></div>
+          <div style="width:40px;height:70px;flex-shrink:0;background:#0f2040;border-radius:5px;opacity:0.5;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Gallery Strip</h3>
+      <p>Large image on top with a horizontal thumbnail strip below. Click any thumbnail to jump directly to it. Active thumbnail has a green highlight border. Counter label top-left.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Minimal card with side nav -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f172a;padding:16px;border-radius:8px;">
+      <div style="display:flex;align-items:center;gap:8px;max-height:300px;">
+        <!-- left arrow -->
+        <div style="background:#1e293b;border-radius:8px;width:32px;height:120px;display:flex;align-items:center;justify-content:center;color:#10b981;font-size:20px;flex-shrink:0;">‹</div>
+        <!-- main content -->
+        <div style="flex:1;background:#1e293b;border-radius:10px;overflow:hidden;">
+          <div style="background:linear-gradient(135deg,#1e3a5f,#0f2040);aspect-ratio:9/16;max-height:220px;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:11px;">
+            📱 Screenshot
+          </div>
+          <div style="padding:8px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:#64748b;">Screenshot 2 / 8</span>
+            <div style="background:rgba(255,255,255,0.1);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:10px;">✕</div>
+          </div>
+        </div>
+        <!-- right arrow -->
+        <div style="background:#1e293b;border-radius:8px;width:32px;height:120px;display:flex;align-items:center;justify-content:center;color:#10b981;font-size:20px;flex-shrink:0;">›</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Card with Side Nav</h3>
+      <p>Compact card modal with dedicated prev/next panels on the left and right sides. Counter + close in a small footer bar below the image. Simple and structured.</p>
+    </div>
+  </div>
+
+</div>

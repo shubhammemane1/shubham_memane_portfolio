@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Popup UI Designs</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #070d1a; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 32px 20px; }
+
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: #f1f5f9; }
+  .sub { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+
+  .designs { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .design-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .design-label { font-size: 12px; font-weight: 700; color: #10b981; letter-spacing: 1px; text-transform: uppercase; }
+  .design-desc { font-size: 11px; color: #64748b; text-align: center; line-height: 1.5; max-width: 240px; }
+
+  /* shared */
+  .popup { border-radius: 16px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.85); }
+
+  /* ── A: Immersive ── */
+  .popup-a { width: 240px; background: #000; position: relative; }
+  .popup-a .main-img { width: 100%; height: 420px; object-fit: cover; display: block; }
+  .popup-a .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 18%, transparent 72%, rgba(0,0,0,0.65) 100%);
+  }
+  .popup-a .close {
+    position: absolute; top: 12px; right: 12px;
+    width: 30px; height: 30px; background: rgba(0,0,0,0.55); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+  .popup-a .arr {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; background: rgba(0,0,0,0.5); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .popup-a .arr.l { left: 10px; }
+  .popup-a .arr.r { right: 10px; }
+  .popup-a .dots {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 5px; align-items: center;
+  }
+  .popup-a .d { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+  .popup-a .d.on { background: #10b981; width: 18px; border-radius: 3px; }
+
+  /* ── B: Gallery Strip ── */
+  .popup-b { width: 240px; background: #0f172a; }
+  .popup-b .hdr {
+    padding: 9px 12px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .popup-b .hdr span { font-size: 11px; color: #64748b; }
+  .popup-b .hdr .x {
+    width: 24px; height: 24px; background: #1e293b; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px;
+  }
+  .popup-b .main { position: relative; height: 340px; overflow: hidden; }
+  .popup-b .main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .popup-b .fade-l {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 44px;
+    background: linear-gradient(to right, rgba(0,0,0,0.55), transparent);
+    display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-size: 24px;
+  }
+  .popup-b .fade-r {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 44px;
+    background: linear-gradient(to left, rgba(0,0,0,0.55), transparent);
+    display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-size: 24px;
+  }
+  .popup-b .strip {
+    background: #070d1a; padding: 8px 10px; display: flex; gap: 6px;
+    overflow-x: auto; border-top: 1px solid rgba(255,255,255,0.04);
+    scrollbar-width: none;
+  }
+  .popup-b .strip::-webkit-scrollbar { display: none; }
+  .popup-b .strip img {
+    width: 38px; height: 66px; object-fit: cover; border-radius: 5px;
+    flex-shrink: 0; opacity: 0.45; border: 2px solid transparent; cursor: pointer;
+  }
+  .popup-b .strip img.active { opacity: 1; border-color: #10b981; }
+
+  /* ── C: Minimal Clean ── */
+  .popup-c { width: 240px; background: #1e293b; }
+  .popup-c .top {
+    padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .popup-c .top .pill {
+    font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.07);
+    padding: 3px 10px; border-radius: 10px;
+  }
+  .popup-c .top .x {
+    width: 26px; height: 26px; background: rgba(255,255,255,0.07); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px;
+  }
+  .popup-c .imgbox { background: #0f172a; height: 350px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .popup-c .imgbox img { height: 100%; width: 100%; object-fit: contain; display: block; }
+  .popup-c .btm {
+    padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .popup-c .navs { display: flex; gap: 8px; }
+  .popup-c .navbtn {
+    width: 34px; height: 34px; background: rgba(16,185,129,0.1); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 18px;
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+  .popup-c .pdots { display: flex; gap: 4px; align-items: center; }
+  .popup-c .pd { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .popup-c .pd.on { background: #10b981; }
+</style>
+</head>
+<body>
+
+<h1>Screenshot Popup — 3 Designs (Torus Screenshots)</h1>
+<p class="sub">Tell me which layout you prefer, or mix elements from different designs.</p>
+
+<div class="designs">
+
+  <!-- A -->
+  <div class="design-col">
+    <div class="design-label">A — Immersive</div>
+    <div class="popup popup-a">
+      <img class="main-img" src="https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo=w526-h296-rw" />
+      <div class="scrim"></div>
+      <div class="close">✕</div>
+      <div class="arr l">‹</div>
+      <div class="arr r">›</div>
+      <div class="dots">
+        <div class="d on"></div>
+        <div class="d"></div>
+        <div class="d"></div>
+        <div class="d"></div>
+        <div class="d"></div>
+      </div>
+    </div>
+    <div class="design-desc">Full image, no header chrome. Floating arrows + green pill dot. Image takes all space.</div>
+  </div>
+
+  <!-- B -->
+  <div class="design-col">
+    <div class="design-label">B — Gallery Strip</div>
+    <div class="popup popup-b">
+      <div class="hdr"><span>Screenshot 1 / 32</span><div class="x">✕</div></div>
+      <div class="main">
+        <img src="https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo=w526-h296-rw" />
+        <div class="fade-l">‹</div>
+        <div class="fade-r">›</div>
+      </div>
+      <div class="strip">
+        <img class="active" src="https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/HkuZPQcXXLJC0FxFRRmONBofPleeKHyWlc7pKGDcn4dozuLwCsOMGetJGWQZ8qtVAQM=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/7WyqTUce83KP8bE7ringdxdWnYFLdhVfd02KPzATuLFt4xv7B-PNKopLzGg4Qn69w9Li=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/Kd40J51_kbz6YryC8njf4hA5Yk8n_uRBXYyK-HDsqYbFi6JNDTK_8L5lf6z-NLsYLg4=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/RfAHnQ2IBQBu3mmpMo-0f514GEyHCYp0bf1Axr-k16CC61xnSOglkix4crSuycVZVKgB=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/_7BRGCg4Bo_TkwH26rqdPJwn0j7Gj6bWOO-u63a1WrHfxw_JjaOqwABGNRK1sFI25Bk=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/sf712ZKRVoRjQ59U_XgZG-K2mrE2NePTaqaUk4jaQNKq0UtkYrhwZI4outqgH8fgwQ=w526-h296-rw" />
+        <img src="https://play-lh.googleusercontent.com/NvOiuysUYdClFhhImfg4taVyEf7qzsCSIwjn9cpH0yIjjOjY2k_6DvNW_cXI-tNj-zQB=w526-h296-rw" />
+      </div>
+    </div>
+    <div class="design-desc">Counter in header. Thumbnail strip below — click any to jump. Active has green border.</div>
+  </div>
+
+  <!-- C -->
+  <div class="design-col">
+    <div class="design-label">C — Minimal Clean</div>
+    <div class="popup popup-c">
+      <div class="top">
+        <div class="pill">1 / 32</div>
+        <div class="x">✕</div>
+      </div>
+      <div class="imgbox">
+        <img src="https://play-lh.googleusercontent.com/CEpaNkzyjRPP-GJzO5gt8U85g7u9owEtEvsQVZwe_jL2qNS4WHhctv6lVAXzeHq5LSo=w526-h296-rw" />
+      </div>
+      <div class="btm">
+        <div class="navs">
+          <div class="navbtn">‹</div>
+          <div class="navbtn">›</div>
+        </div>
+        <div class="pdots">
+          <div class="pd on"></div>
+          <div class="pd"></div>
+          <div class="pd"></div>
+          <div class="pd"></div>
+          <div class="pd"></div>
+        </div>
+      </div>
+    </div>
+    <div class="design-desc">Counter pill top-left. Image with contain fit (full image visible). Prev/next + dots in footer.</div>
+  </div>
+
+</div>
+
+<p style="margin-top:28px;font-size:12px;color:#475569;text-align:center;">Pick A, B, or C — or describe a mix (e.g. "A's full image + B's thumbnail strip")</p>
+
+</body>
+</html>

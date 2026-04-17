@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Media Section Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f172a; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 24px; }
+  h2 { font-size: 13px; color: #64748b; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+
+  /* ── Media Strip ── */
+  .section-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #f1f5f9; }
+  .media-strip { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .media-thumb {
+    position: relative; flex-shrink: 0; width: 180px; height: 320px;
+    border-radius: 12px; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent; transition: border-color .2s;
+  }
+  .media-thumb:hover { border-color: #10b981; }
+  .media-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .play-overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.45);
+  }
+  .play-btn {
+    width: 48px; height: 48px; background: rgba(16,185,129,0.9); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .play-btn svg { margin-left: 3px; }
+  .video-badge {
+    position: absolute; bottom: 8px; left: 8px; background: rgba(16,185,129,0.9);
+    color: #fff; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: .5px; text-transform: uppercase;
+  }
+
+  /* ── Popup Overlay ── */
+  .popup-label { font-size: 13px; color: #64748b; margin: 32px 0 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .popup-wrap { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  .popup {
+    background: rgba(0,0,0,0.88); border-radius: 16px; padding: 16px;
+    width: 300px; position: relative;
+  }
+  .popup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .popup-header span { font-size: 12px; color: #94a3b8; }
+  .close-btn {
+    width: 28px; height: 28px; background: #1e293b; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: #94a3b8; font-size: 16px; flex-shrink: 0;
+  }
+
+  /* image popup */
+  .popup-img-area { border-radius: 10px; overflow: hidden; background: #1e293b; }
+  .popup-img-area img { width: 100%; display: block; border-radius: 10px; }
+
+  /* video popup */
+  .popup-video-area {
+    background: #000; border-radius: 10px; height: 168px;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+  }
+  .popup-play-big {
+    width: 60px; height: 60px; background: rgba(16,185,129,0.9); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .popup-play-big svg { margin-left: 4px; }
+  .popup-video-label { color: #64748b; font-size: 11px; }
+  .video-controls {
+    display: flex; align-items: center; gap: 8px; margin-top: 10px;
+    background: #1e293b; padding: 8px 12px; border-radius: 8px;
+  }
+  .progress-bar { flex: 1; height: 3px; background: #334155; border-radius: 2px; position: relative; }
+  .progress-fill { width: 35%; height: 100%; background: #10b981; border-radius: 2px; }
+  .time-label { font-size: 10px; color: #64748b; }
+</style>
+</head>
+<body>
+
+<h2>Project Detail Page — Media Section Preview</h2>
+
+<!-- Media Strip -->
+<div class="section-title">Screenshots & Videos</div>
+<div class="media-strip">
+
+  <!-- Image thumbs -->
+  <div class="media-thumb">
+    <img src="https://play-lh.googleusercontent.com/vmt5K2rdLCCCZMW8uPijoLF4UrLOWeoxQtw4Xy1eRoLx-IV2w1B8QOhFCso-l6KSFYGZ1l0AqLrhw6YkCb7P" />
+  </div>
+  <div class="media-thumb">
+    <img src="https://play-lh.googleusercontent.com/J8FUh1-NuNXac9LPcDW-dQSlt5EOSPGaG4Ad-OrF1-ryy_uzly4cvZyMN3CpB-wIKqmaZLQY7tLBgYz7cL8OEA" />
+  </div>
+
+  <!-- Video thumb -->
+  <div class="media-thumb">
+    <img src="https://play-lh.googleusercontent.com/FJOIblR_cxssqjfygtATX9Jge2o9DdYVwwN7X_lurDkTH4u2XgGRk0Q2iWBtjxFVfzOiFivljAcKXzf2PoGbOw" />
+    <div class="play-overlay">
+      <div class="play-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+    <div class="video-badge">Video</div>
+  </div>
+
+  <div class="media-thumb">
+    <img src="https://play-lh.googleusercontent.com/R_u5EAVngarrjJxh6SmBZYHvN7pDd_bVg2EYXdt1P4_mIR8f6EUvetZSd4dExHJkHba_1nrzo1OrKKc1PTLaLQ" />
+  </div>
+  <div class="media-thumb">
+    <img src="https://play-lh.googleusercontent.com/Jkf_mxmQMxA-H0qFTJ2rnLr9Ycxn2tMpnoPGuIrOnbVm8Br-xFChsWr01I6Ui1DYX7f6QKAKx-u5b2bpHdAcew" />
+  </div>
+
+</div>
+
+<!-- Popups -->
+<div class="popup-label">Popup — when user taps thumbnail</div>
+<div class="popup-wrap">
+
+  <!-- Image popup -->
+  <div class="popup">
+    <div class="popup-header">
+      <span>Screenshot 1 / 4</span>
+      <div class="close-btn">✕</div>
+    </div>
+    <div class="popup-img-area">
+      <img src="https://play-lh.googleusercontent.com/vmt5K2rdLCCCZMW8uPijoLF4UrLOWeoxQtw4Xy1eRoLx-IV2w1B8QOhFCso-l6KSFYGZ1l0AqLrhw6YkCb7P" />
+    </div>
+  </div>
+
+  <!-- Video popup -->
+  <div class="popup">
+    <div class="popup-header">
+      <span>App Preview Video</span>
+      <div class="close-btn">✕</div>
+    </div>
+    <div class="popup-video-area">
+      <div class="popup-play-big">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="popup-video-label">Tap to play</div>
+    </div>
+    <div class="video-controls">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#10b981"><polygon points="5,3 19,12 5,21"/></svg>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="time-label">0:35 / 1:42</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

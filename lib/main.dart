@@ -6,8 +6,16 @@ import 'domain/models/portfolio_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final data = await PortfolioService.load();
-  runApp(MyApp(portfolioData: data));
+  try {
+    final data = await PortfolioService.load();
+    runApp(MyApp(portfolioData: data));
+  } catch (e) {
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(child: Text('Failed to load portfolio: $e')),
+      ),
+    ));
+  }
 }
 
 class MyApp extends StatefulWidget {

@@ -16,32 +16,46 @@ shubhammemaneportfolio/
 ├── lib/
 │   ├── core/
 │   │   ├── constants/
-│   │   │   ├── app_config.dart          # App configuration settings
-│   │   │   └── portfolio_data.dart      # Portfolio content data
+│   │   │   └── app_config.dart          # App configuration settings
+│   │   ├── router/
+│   │   │   └── app_router.dart          # go_router: / and /project/:slug
+│   │   ├── services/
+│   │   │   └── portfolio_service.dart   # Loads assets/data/portfolio.json
+│   │   ├── state/
+│   │   │   └── mouse_notifier.dart      # Mouse position for tilt/parallax
 │   │   ├── theme/
 │   │   │   └── app_theme.dart           # Design system & theme
 │   │   └── utils/
-│   │       └── responsive.dart          # Responsive utilities
+│   │       └── responsive.dart          # Responsive breakpoints helper
 │   ├── domain/
 │   │   └── models/
-│   │       └── portfolio_data.dart      # Data models
+│   │       └── portfolio_data.dart      # Data models (fromJson support)
 │   └── presentation/
 │       ├── pages/
-│       │   └── home_page.dart           # Main home page
+│       │   ├── home_page.dart           # Main scrollable page
+│       │   └── project_detail_page.dart # /project/:slug — full detail view
 │       └── widgets/
-│           ├── nav_bar.dart             # Navigation bar
-│           ├── hero_section.dart        # Hero/intro section
-│           ├── skills_section.dart      # Skills display
-│           ├── projects_section.dart    # Projects showcase
-│           ├── experience_section.dart  # Work experience
-│           └── contact_section.dart     # Contact section
+│           ├── nav_bar.dart             # Top navigation bar
+│           ├── hero_section.dart        # Animated intro + typewriter
+│           ├── particle_canvas.dart     # Canvas particle background
+│           ├── parallax_rings.dart      # Mouse-reactive ring decorations
+│           ├── skills_section.dart      # Skills with progress bars
+│           ├── projects_section.dart    # Project cards grid
+│           ├── tilt_card.dart           # 3D tilt card on mouse move
+│           ├── project_icon_button.dart # GitHub/live/store icon button
+│           ├── media_section.dart       # Image + YouTube thumbnail grid
+│           ├── media_dialog.dart        # Full-screen media viewer dialog
+│           ├── experience_section.dart  # Timeline work history
+│           └── contact_section.dart     # Social links
 ├── assets/
-│   └── images/                          # Image assets
-├── web/                                 # Web configuration
-├── pubspec.yaml                         # Dependencies
-├── README.md                            # Documentation
-├── CUSTOMIZATION.md                     # Customization guide
-└── PROJECT_CONTEXT.md                   # This file
+│   ├── data/
+│   │   └── portfolio.json              # All portfolio content (edit here)
+│   └── images/                         # Image assets
+├── web/                                # Web configuration
+├── pubspec.yaml                        # Dependencies
+├── README.md                           # Documentation
+├── CUSTOMIZATION.md                    # Customization guide
+└── PROJECT_CONTEXT.md                  # This file
 ```
 
 ---
@@ -117,10 +131,25 @@ error: Color(0xFFEF4444)
 3. ✅ Changed primary color from purple/indigo to green (#10B981)
 4. ✅ Updated project card gradient to use green → cyan instead of green → teal
 
-### Import Fixes
-1. ✅ Fixed import path in `lib/core/constants/portfolio_data.dart`
-2. ✅ Fixed dangling library doc comment in `app_config.dart`
-3. ✅ All imports verified and working correctly
+### Session 3 - 3D Motion & Visual Effects
+1. ✅ Added particle canvas background to Hero section
+2. ✅ Added mouse-reactive parallax rings decoration
+3. ✅ Added 3D tilt card effect on project cards
+4. ✅ Added `mouse_notifier.dart` for global mouse position state
+
+### Session 4 - Project Detail Page & Routing
+1. ✅ Added `go_router` for client-side routing
+2. ✅ Created `ProjectDetailPage` at `/project/:slug`
+3. ✅ Added `slug` field to `Project` model
+4. ✅ Added `longDescription`, `rating`, `downloads`, `media` fields
+5. ✅ Added `ProjectIconButton` for store/GitHub/live links
+6. ✅ Migrated portfolio data from Dart constants → `assets/data/portfolio.json`
+7. ✅ Created `PortfolioService` for async JSON loading
+
+### Session 5 - Media Viewer
+1. ✅ Added `MediaSection` widget with image + YouTube thumbnail grid
+2. ✅ Added `MediaDialog` full-screen viewer (images + YouTube embed)
+3. ✅ Deduplicated `extractYouTubeId`, use URL-based `viewId`
 
 ---
 
@@ -133,8 +162,10 @@ dependencies:
   google_fonts: ^6.2.1              # Typography
   url_launcher: ^6.3.1              # External links
   font_awesome_flutter: ^10.7.0     # Icons
-  animated_text_kit: ^4.2.2         # Text animations
+  animated_text_kit: ^4.3.0         # Text animations
   visibility_detector: ^0.4.0+2     # Scroll animations
+  palette_generator: ^0.3.3         # Dynamic color from images
+  go_router: ^14.0.0                # Client-side routing
 ```
 
 ---
@@ -150,7 +181,8 @@ dependencies:
 ### 2. Hero Section
 - Animated fade-in and slide-up effects
 - Typewriter effect for job titles
-- Responsive typography
+- Particle canvas background
+- Mouse-reactive parallax rings
 - Call-to-action button
 
 ### 3. Skills Section
@@ -160,29 +192,44 @@ dependencies:
 - Responsive card layout
 
 ### 4. Projects Section
-- Project cards with hover effects
+- 3D tilt cards on mouse hover
 - Gradient backgrounds (green → cyan)
+- Rating stars + download count display
 - Technology tags
-- GitHub and live demo links
+- GitHub / Play Store / App Store / live demo icon buttons
+- Click opens `/project/:slug` detail page
 - Responsive grid layout
 
-### 5. Experience Section
+### 5. Project Detail Page
+- Full `longDescription`
+- Media gallery: image thumbnails + YouTube embeds
+- Full-screen media viewer dialog
+- Technology tags
+- Back navigation via go_router
+
+### 6. Experience Section
 - Timeline-style layout
 - Animated on scroll
-- Company and position details
+- Company, position, duration, description
 - Responsive design
 
-### 6. Contact Section
+### 7. Contact Section
 - Social media links (Email, GitHub, LinkedIn, Twitter)
 - Hover animations
 - Icon buttons with Font Awesome
 - URL launcher integration
 
-### 7. Theme System
+### 8. Theme System
 - Light and dark mode support
 - Pure black dark mode for OLED screens
 - Smooth theme transitions
 - Consistent color palette
+
+### 9. Data Layer
+- All content in `assets/data/portfolio.json`
+- `PortfolioService.load()` reads + parses JSON at startup
+- `PortfolioData.fromJson()` on all models
+- Projects identified by `slug` for routing
 
 ---
 
@@ -357,12 +404,23 @@ flutter doctor
 - Changed gradient from green-teal to green-cyan
 - Uses AppColors.primary and AppColors.accent
 
-### lib/core/constants/portfolio_data.dart
-- Fixed import path to use correct relative path
-- Sample data populated for Shubham Memane
-
 ### lib/core/constants/app_config.dart
 - Fixed dangling library doc comment
+
+### assets/data/portfolio.json
+- All portfolio content (personal info, skills, projects, experience, education, contact)
+- Projects include: slug, longDescription, rating, downloads, media array
+- Media items: `{ "type": "image"|"youtube", "url": "...", "caption": "..." }`
+
+### lib/domain/models/portfolio_data.dart
+- All models have `fromJson` factory constructors
+- `Project.slug` used for routing
+
+### lib/core/router/app_router.dart
+- Routes: `/` → HomePage, `/project/:slug` → ProjectDetailPage
+
+### lib/core/services/portfolio_service.dart
+- `PortfolioService.load()` — async loads + parses JSON from assets
 
 ---
 
@@ -376,8 +434,8 @@ For questions about this project:
 
 ---
 
-**Last Updated**: 2024  
-**Version**: 1.0.0  
+**Last Updated**: 2026-04-17  
+**Version**: 1.5.0  
 **Maintained By**: Shubham Memane
 
 ---

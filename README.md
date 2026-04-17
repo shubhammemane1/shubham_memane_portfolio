@@ -17,14 +17,22 @@ A fully responsive, modern Flutter web portfolio with clean architecture, design
 ```
 lib/
 ├── core/
-│   ├── constants/        # Portfolio data
-│   ├── theme/           # Design system (colors, typography, spacing)
-│   └── utils/           # Utilities (responsive helper)
+│   ├── constants/        # App configuration
+│   ├── router/           # go_router setup (/, /project/:slug)
+│   ├── services/         # PortfolioService (loads JSON asset)
+│   ├── state/            # Mouse position notifier
+│   ├── theme/            # Design system (colors, typography, spacing)
+│   └── utils/            # Responsive helper
 ├── domain/
-│   └── models/          # Data models
+│   └── models/           # Data models (PortfolioData, Project, Skill…)
 └── presentation/
-    ├── pages/           # Main pages
-    └── widgets/         # Reusable UI components
+    ├── pages/            # HomePage, ProjectDetailPage
+    └── widgets/          # UI components (see Sections below)
+
+assets/
+├── data/
+│   └── portfolio.json    # All portfolio content (edit here)
+└── images/               # Image assets
 ```
 
 ## 🚀 Getting Started
@@ -50,50 +58,51 @@ lib/
 
 ### 1. Update Your Information
 
-Edit `lib/core/constants/portfolio_data.dart`:
+Edit `assets/data/portfolio.json` — all portfolio content lives here:
 
-```dart
-final portfolioData = PortfolioData(
-  personalInfo: PersonalInfo(
-    name: 'Your Name',
-    title: 'Your Title',
-    bio: 'Your bio...',
-  ),
-  skills: [
-    Skill(name: 'Flutter', category: 'Mobile', proficiency: 0.9),
-    // Add your skills
+```json
+{
+  "personalInfo": {
+    "name": "Your Name",
+    "title": "Your Title",
+    "bio": "Your bio..."
+  },
+  "skills": [
+    { "name": "Flutter", "category": "Mobile", "proficiency": 0.9 }
   ],
-  projects: [
-    Project(
-      title: 'Your Project',
-      description: 'Description...',
-      technologies: ['Flutter', 'Firebase'],
-      githubUrl: 'https://github.com/...',
-    ),
-    // Add your projects
+  "projects": [
+    {
+      "title": "Your Project",
+      "slug": "your-project",
+      "description": "Short description",
+      "longDescription": "Full detail page description",
+      "technologies": ["Flutter", "Firebase"],
+      "githubUrl": "https://github.com/...",
+      "liveUrl": "https://...",
+      "rating": 4.5,
+      "downloads": "10K+",
+      "media": [
+        { "type": "image", "url": "assets/images/screenshot.png", "caption": "Home screen" }
+      ]
+    }
   ],
-  experiences: [
-    Experience(
-      company: 'Company Name',
-      position: 'Your Position',
-      duration: '2020 - Present',
-      description: 'What you did...',
-    ),
-    // Add your experiences
+  "experiences": [
+    {
+      "company": "Company Name",
+      "position": "Your Position",
+      "duration": "2020 - Present",
+      "description": "What you did..."
+    }
   ],
-  education: [
-    Education(
-      institution: 'University',
-      degree: 'Your Degree',
-      duration: '2016 - 2020',
-    ),
+  "education": [
+    { "institution": "University", "degree": "Your Degree", "duration": "2016 - 2020" }
   ],
-  contactInfo: ContactInfo(
-    email: 'your@email.com',
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
-  ),
-);
+  "contactInfo": {
+    "email": "your@email.com",
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourusername"
+  }
+}
 ```
 
 ### 2. Customize Colors
@@ -138,19 +147,22 @@ Text(
 
 ## 🎭 Sections
 
-1. **Hero Section** - Animated introduction with typewriter effect
+1. **Hero Section** - Animated intro with typewriter effect and particle canvas
 2. **Skills Section** - Categorized skills with animated progress bars
-3. **Projects Section** - Project cards with hover effects
-4. **Experience Section** - Timeline-style experience display
-5. **Contact Section** - Social links with hover animations
+3. **Projects Section** - Tilt cards with hover effects, rating, downloads; click → detail page
+4. **Project Detail Page** - Full description, media gallery (images + YouTube), tech tags
+5. **Experience Section** - Timeline-style work history
+6. **Contact Section** - Social links with hover animations
 
 ## 🛠️ Tech Stack
 
 - **Flutter** - UI framework
-- **Google Fonts** - Typography
+- **go_router** - Client-side routing (`/`, `/project/:slug`)
+- **Google Fonts** - Typography (Poppins + Inter)
 - **Font Awesome** - Icons
-- **Animated Text Kit** - Text animations
-- **Visibility Detector** - Scroll animations
+- **Animated Text Kit** - Typewriter animations
+- **Visibility Detector** - Scroll-triggered animations
+- **Palette Generator** - Dynamic color extraction from images
 - **URL Launcher** - External links
 
 ## 🌐 Deployment
