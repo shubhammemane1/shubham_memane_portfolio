@@ -26,13 +26,15 @@ void main() {
     }
 
     await tester.pumpWidget(PortfolioBootstrap(loader: loader));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
     expect(find.textContaining('Failed to load portfolio'), findsOneWidget);
     expect(find.widgetWithText(ElevatedButton, 'Retry'), findsOneWidget);
 
     await tester.tap(find.widgetWithText(ElevatedButton, 'Retry'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
     expect(find.textContaining('Failed to load portfolio'), findsNothing);
     expect(attempt, 2);
