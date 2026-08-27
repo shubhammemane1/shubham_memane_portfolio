@@ -8,7 +8,7 @@ const serviceAccount = require(path.join(__dirname, 'service-account.json'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: `${serviceAccount.project_id}.appspot.com`,
+  storageBucket: 'shubhammemaneportfolio-e4dd0.firebasestorage.app',
 });
 
 const db = admin.firestore();
