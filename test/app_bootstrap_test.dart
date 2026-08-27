@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:shubhammemaneportfolio/main.dart';
 import 'package:shubhammemaneportfolio/domain/models/portfolio_data.dart';
 
@@ -16,6 +17,8 @@ PortfolioData _fakeData() {
 
 void main() {
   testWidgets('shows retry button on failure, recovers on tap', (tester) async {
+    VisibilityDetectorController.instance.updateInterval = Duration.zero;
+
     var attempt = 0;
     Future<PortfolioData> loader() async {
       attempt++;
