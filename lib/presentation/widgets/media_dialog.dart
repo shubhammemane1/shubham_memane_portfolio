@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-// ignore: avoid_web_libraries_in_flutter
 // Conditional imports: use stub on non-web platforms, real libs on web
 import '../../stubs/dart_html_stub.dart' as html
     if (dart.library.html) 'dart:html';

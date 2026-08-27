@@ -11,7 +11,7 @@ class PortfolioService {
       throw StateError('portfolio/meta document not found in Firestore');
     }
 
-    final projectsSnapshot = await db.collection('projects').get();
+    final projectsSnapshot = await db.collection('projects').orderBy('order').get();
     final projects = projectsSnapshot.docs.map((doc) => doc.data()).toList();
 
     return PortfolioData.fromJson({

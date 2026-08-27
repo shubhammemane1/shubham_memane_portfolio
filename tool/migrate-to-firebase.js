@@ -8,6 +8,8 @@ const serviceAccount = require(path.join(__dirname, 'service-account.json'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  // Hardcoded: this project's bucket uses the newer .firebasestorage.app
+  // suffix, not the legacy `${project_id}.appspot.com` pattern — do not derive this from project_id.
   storageBucket: 'shubhammemaneportfolio-e4dd0.firebasestorage.app',
 });
 
@@ -56,7 +58,7 @@ const LOCAL_ICONS = {
   'torus-banking-trading-demat': 'assets/images/torus-icon.webp',
 };
 
-async function migrateProject(project) {
+async function migrateProject(project, order) {
   const slug = project.slug;
   console.log(`[${slug}] uploading images...`);
 
@@ -73,6 +75,7 @@ async function migrateProject(project) {
     ...project,
     imageUrl,
     screenshots,
+    order,
   };
 
   await db.collection('projects').doc(slug).set(migrated);
@@ -93,8 +96,8 @@ async function main() {
   await db.collection('portfolio').doc('meta').set(meta);
   console.log('portfolio/meta written');
 
-  for (const project of data.projects) {
-    await migrateProject(project);
+  for (let i = 0; i < data.projects.length; i++) {
+    await migrateProject(data.projects[i], i);
   }
 
   console.log('Migration complete.');

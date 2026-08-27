@@ -51,6 +51,7 @@ void main() {
       'longDescription': null,
       'rating': null,
       'downloads': null,
+      'order': 0,
     });
 
     final data = await PortfolioService.load(firestore: firestore);
