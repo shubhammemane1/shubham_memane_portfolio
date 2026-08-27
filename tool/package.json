@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-migration-tool",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}
