@@ -1,0 +1,687 @@
+# Firebase Portfolio Backend Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Move portfolio content and images from a bundled JSON asset + hotlinked Play Store CDN URLs onto Cloud Firestore + Firebase Storage on project `shubhammemaneportfolio-e4dd0`, fixing the 429 rate-limit errors and enabling console-editable content.
+
+**Architecture:** `PortfolioService.load()` reads from Firestore (`portfolio/meta` doc + `projects` collection) instead of `rootBundle.loadString`, reconstructing the same `PortfolioData` model via its existing `fromJson` factories so no downstream widget changes. A one-time Node.js script seeds Firestore + Storage from the current `assets/data/portfolio.json`, uploading every image and rewriting URLs to point at Storage.
+
+**Tech Stack:** Flutter (`firebase_core`, `cloud_firestore`), Node.js (`firebase-admin`) for the migration script, `fake_cloud_firestore` for Dart tests.
+
+**Spec:** `docs/superpowers/specs/2026-08-27-firebase-portfolio-backend-design.md`
+
+## Global Constraints
+
+- Firestore/Storage security rules are read-only from the client: `allow read: if true; allow write: if false;` — no exceptions (spec §3).
+- `firebase_storage` is NOT added as a Flutter dependency — the app only ever reads plain URLs already resolved into Firestore doc fields (spec §5).
+- `assets/data/portfolio.json` stays in the repo as the migration seed source; the running app stops reading it once `PortfolioService` is updated (spec §1, §4).
+- Migration script lives at `tool/migrate-to-firebase.js`, uses `firebase-admin`, authenticated via a service account key at `tool/service-account.json` — this file must be gitignored, never committed (spec §4).
+- `projects` is a Firestore collection (doc ID = slug), not an array field — each project must be independently editable from the console (spec §1).
+
+---
+
+### Task 1: Enable Firestore + Storage, apply security rules
+
+**Files:**
+- Create: `firestore.rules`
+- Create: `storage.rules`
+- Create: `firebase.json`
+- Create: `.firebaserc`
+
+**Interfaces:**
+- Produces: a live Firestore database (`(default)`) and Storage bucket on project `shubhammemaneportfolio-e4dd0`, both with read-only public rules, ready for Task 5's migration script to write into (writes will use the Admin SDK, which bypasses these rules).
+
+- [ ] **Step 1: Create `.firebaserc` pinning the project**
+
+```json
+{
+  "projects": {
+    "default": "shubhammemaneportfolio-e4dd0"
+  }
+}
+```
+
+- [ ] **Step 2: Create `firestore.rules`**
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
+```
+
+- [ ] **Step 3: Create `storage.rules`**
+
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
+```
+
+- [ ] **Step 4: Create `firebase.json` wiring both rule files**
+
+```json
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
+```
+
+- [ ] **Step 5: Create the default Firestore database**
+
+Run: `firebase firestore:databases:create "(default)" --location nam5 --project shubhammemaneportfolio-e4dd0`
+
+Expected: command succeeds, or reports the database already exists. If it errors with "Cloud Firestore API has not been used", open the URL it prints, click Enable, wait a minute, and re-run.
+
+- [ ] **Step 6: Provision the default Storage bucket**
+
+Run: `firebase init storage --project shubhammemaneportfolio-e4dd0` and when prompted for the rules file path, enter `storage.rules` (already created in Step 3 — accept overwrite prompt as "N" if it asks to avoid clobbering it, or just let it point at the same file).
+
+If the CLI reports the Storage bucket needs to be created via console first (happens on brand-new projects without a linked billing account on some plans), go to `https://console.firebase.google.com/project/shubhammemaneportfolio-e4dd0/storage` and click "Get Started" to provision the default bucket, then re-run this step.
+
+- [ ] **Step 7: Deploy both rule sets**
+
+Run: `firebase deploy --only firestore:rules,storage --project shubhammemaneportfolio-e4dd0`
+
+Expected: `Deploy complete!`
+
+- [ ] **Step 8: Verify rules are live**
+
+Run: `firebase firestore:databases:list --project shubhammemaneportfolio-e4dd0`
+
+Expected: table listing the `(default)` database (no more 403 error).
+
+- [ ] **Step 9: Commit**
+
+```bash
+git add firestore.rules storage.rules firebase.json .firebaserc
+git commit -m "chore: provision Firestore and Storage with read-only rules"
+```
+
+---
+
+### Task 2: Register the Flutter app with Firebase
+
+**Files:**
+- Create: `lib/firebase_options.dart` (generated by `flutterfire configure`)
+- Modify: `pubspec.yaml`
+- Modify: `lib/main.dart`
+
+**Interfaces:**
+- Consumes: nothing from Task 1 directly (this is independent registration), but the project ID must match `shubhammemaneportfolio-e4dd0`.
+- Produces: `Firebase.initializeApp()` called before `runApp` in `main.dart`, so Task 3's `cloud_firestore` calls have an initialized app to attach to.
+
+- [ ] **Step 1: Install the FlutterFire CLI (if not already present)**
+
+Run: `dart pub global activate flutterfire_cli`
+
+- [ ] **Step 2: Run configure against the existing project**
+
+Run: `flutterfire configure --project=shubhammemaneportfolio-e4dd0 --platforms=web`
+
+(This repo is a Flutter web portfolio — pass `--platforms=web` unless you also want native app registrations added later.) Follow prompts; accept the default app nickname. This generates `lib/firebase_options.dart` and adds `firebase_core` to `pubspec.yaml` automatically.
+
+- [ ] **Step 3: Verify the dependency landed**
+
+Run: `grep firebase_core pubspec.yaml`
+
+Expected: a `firebase_core: ^<version>` line under `dependencies`.
+
+- [ ] **Step 4: Wire initialization into `main.dart`**
+
+Modify `lib/main.dart` — add the Firebase import and options import, and call `Firebase.initializeApp()` before the existing `PortfolioService.load()` call:
+
+```dart
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+```
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    final data = await PortfolioService.load();
+    runApp(MyApp(portfolioData: data));
+  } catch (e) {
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(child: Text('Failed to load portfolio: $e')),
+      ),
+    ));
+  }
+}
+```
+
+- [ ] **Step 5: Run the app and confirm Firebase initializes without throwing**
+
+Run: `flutter run -d chrome`
+
+Expected: app launches (it will still show "Failed to load portfolio" since `PortfolioService` still reads the old JSON asset in this task — that's fine, Task 3 fixes it). No Firebase initialization exception in the console.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add lib/firebase_options.dart lib/main.dart pubspec.yaml pubspec.lock
+git commit -m "feat: register Flutter app with Firebase and initialize on startup"
+```
+
+---
+
+### Task 3: Rewrite `PortfolioService.load()` to read from Firestore
+
+**Files:**
+- Modify: `pubspec.yaml`
+- Modify: `lib/core/services/portfolio_service.dart`
+- Test: `test/core/services/portfolio_service_test.dart`
+
+**Interfaces:**
+- Consumes: `PortfolioData.fromJson(Map<String, dynamic>)` and all nested `fromJson` factories from `lib/domain/models/portfolio_data.dart` — unchanged, reused as-is.
+- Produces: `static Future<PortfolioData> PortfolioService.load({FirebaseFirestore? firestore})` — same return type and default call shape (`PortfolioService.load()`) as before, so `main.dart` (Task 2) and any other caller needs zero changes. The optional `firestore` parameter exists solely so tests can inject a fake instance.
+
+- [ ] **Step 1: Add Firestore dependencies**
+
+Run: `flutter pub add cloud_firestore` and `flutter pub add dev:fake_cloud_firestore`
+
+- [ ] **Step 2: Write the failing test**
+
+Create `test/core/services/portfolio_service_test.dart`:
+
+```dart
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:shubhammemaneportfolio/core/services/portfolio_service.dart';
+
+void main() {
+  test('loads portfolio data from Firestore', () async {
+    final firestore = FakeFirebaseFirestore();
+    await firestore.collection('portfolio').doc('meta').set({
+      'personalInfo': {
+        'name': 'Test User',
+        'title': 'Developer',
+        'bio': 'Bio text',
+        'imageUrl': null,
+      },
+      'skills': [
+        {'name': 'Flutter', 'category': 'Mobile', 'proficiency': 0.9},
+      ],
+      'experiences': [
+        {
+          'company': 'Acme',
+          'position': 'Engineer',
+          'duration': '2020-2022',
+          'description': 'Built things',
+        },
+      ],
+      'education': [
+        {'institution': 'Uni', 'degree': 'BSc', 'duration': '2016-2020'},
+      ],
+      'contactInfo': {
+        'email': 'test@example.com',
+        'phone': null,
+        'github': null,
+        'linkedin': null,
+        'twitter': null,
+        'website': null,
+      },
+    });
+    await firestore.collection('projects').doc('demo').set({
+      'title': 'Demo Project',
+      'description': 'A demo',
+      'technologies': ['Flutter'],
+      'imageUrl': 'https://example.com/icon.png',
+      'liveUrl': null,
+      'githubUrl': null,
+      'playStoreUrl': null,
+      'appStoreUrl': null,
+      'icon': null,
+      'slug': 'demo',
+      'screenshots': <String>[],
+      'videos': <String>[],
+      'longDescription': null,
+      'rating': null,
+      'downloads': null,
+    });
+
+    final data = await PortfolioService.load(firestore: firestore);
+
+    expect(data.personalInfo.name, 'Test User');
+    expect(data.skills.single.name, 'Flutter');
+    expect(data.projects.single.slug, 'demo');
+    expect(data.contactInfo.email, 'test@example.com');
+  });
+
+  test('throws when portfolio/meta document is missing', () async {
+    final firestore = FakeFirebaseFirestore();
+
+    expect(
+      () => PortfolioService.load(firestore: firestore),
+      throwsA(isA<StateError>()),
+    );
+  });
+}
+```
+
+- [ ] **Step 3: Run the test to verify it fails**
+
+Run: `flutter test test/core/services/portfolio_service_test.dart`
+
+Expected: FAIL — `load` doesn't accept a `firestore` named parameter yet (compile error) or the old implementation still reads `rootBundle`.
+
+- [ ] **Step 4: Rewrite `PortfolioService`**
+
+Replace the contents of `lib/core/services/portfolio_service.dart`:
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../domain/models/portfolio_data.dart';
+
+class PortfolioService {
+  static Future<PortfolioData> load({FirebaseFirestore? firestore}) async {
+    final db = firestore ?? FirebaseFirestore.instance;
+
+    final metaSnapshot = await db.collection('portfolio').doc('meta').get();
+    final metaData = metaSnapshot.data();
+    if (metaData == null) {
+      throw StateError('portfolio/meta document not found in Firestore');
+    }
+
+    final projectsSnapshot = await db.collection('projects').get();
+    final projects = projectsSnapshot.docs.map((doc) => doc.data()).toList();
+
+    return PortfolioData.fromJson({
+      ...metaData,
+      'projects': projects,
+    });
+  }
+}
+```
+
+- [ ] **Step 5: Run the test to verify it passes**
+
+Run: `flutter test test/core/services/portfolio_service_test.dart`
+
+Expected: PASS (2 tests).
+
+- [ ] **Step 6: Run the full test suite to confirm no regressions**
+
+Run: `flutter test`
+
+Expected: all tests pass, including the pre-existing `test/project_model_test.dart`, `test/project_detail_page_test.dart`, `test/presentation/widgets/media_section_test.dart`.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add pubspec.yaml pubspec.lock lib/core/services/portfolio_service.dart test/core/services/portfolio_service_test.dart
+git commit -m "feat: read portfolio data from Firestore instead of bundled JSON"
+```
+
+---
+
+### Task 4: Add retry to the portfolio load failure screen
+
+**Files:**
+- Modify: `lib/main.dart`
+- Test: `test/app_bootstrap_test.dart`
+
+**Interfaces:**
+- Consumes: `PortfolioService.load()` from Task 3 (default, no-arg call in production) and `PortfolioData` from `lib/domain/models/portfolio_data.dart`.
+- Produces: `_PortfolioBootstrap` widget with an optional `loader` constructor parameter (`Future<PortfolioData> Function()? loader`), used only by the test in this task — production code (`main()`) doesn't pass it, so it defaults to `PortfolioService.load`.
+
+- [ ] **Step 1: Write the failing widget test**
+
+Create `test/app_bootstrap_test.dart`:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:shubhammemaneportfolio/main.dart';
+import 'package:shubhammemaneportfolio/domain/models/portfolio_data.dart';
+
+PortfolioData _fakeData() {
+  return PortfolioData(
+    personalInfo: PersonalInfo(name: 'Test', title: 'Dev', bio: 'Bio'),
+    skills: const [],
+    projects: const [],
+    experiences: const [],
+    education: const [],
+    contactInfo: ContactInfo(email: 'a@b.com'),
+  );
+}
+
+void main() {
+  testWidgets('shows retry button on failure, recovers on tap', (tester) async {
+    var attempt = 0;
+    Future<PortfolioData> loader() async {
+      attempt++;
+      if (attempt == 1) {
+        throw Exception('network down');
+      }
+      return _fakeData();
+    }
+
+    await tester.pumpWidget(PortfolioBootstrap(loader: loader));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Failed to load portfolio'), findsOneWidget);
+    expect(find.widgetWithText(ElevatedButton, 'Retry'), findsOneWidget);
+
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Retry'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Failed to load portfolio'), findsNothing);
+    expect(attempt, 2);
+  });
+}
+```
+
+- [ ] **Step 2: Run the test to verify it fails**
+
+Run: `flutter test test/app_bootstrap_test.dart`
+
+Expected: FAIL — `PortfolioBootstrap` doesn't exist yet.
+
+- [ ] **Step 3: Replace the try/catch in `main.dart` with a retry-capable bootstrap widget**
+
+Replace `lib/main.dart`'s `main()` function and add the new widget (keep the existing `Firebase.initializeApp()` call from Task 2, and keep `MyApp` unchanged):
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const PortfolioBootstrap());
+}
+
+class PortfolioBootstrap extends StatefulWidget {
+  final Future<PortfolioData> Function() loader;
+
+  PortfolioBootstrap({super.key, Future<PortfolioData> Function()? loader})
+      : loader = loader ?? PortfolioService.load;
+
+  @override
+  State<PortfolioBootstrap> createState() => _PortfolioBootstrapState();
+}
+
+class _PortfolioBootstrapState extends State<PortfolioBootstrap> {
+  late Future<PortfolioData> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = widget.loader();
+  }
+
+  void _retry() {
+    setState(() => _future = widget.loader());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<PortfolioData>(
+      future: _future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const MaterialApp(
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          );
+        }
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Failed to load portfolio: ${snapshot.error}'),
+                    const SizedBox(height: 16),
+                    ElevatedButton(onPressed: _retry, child: const Text('Retry')),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        return MyApp(portfolioData: snapshot.data!);
+      },
+    );
+  }
+}
+```
+
+- [ ] **Step 4: Run the test to verify it passes**
+
+Run: `flutter test test/app_bootstrap_test.dart`
+
+Expected: PASS.
+
+- [ ] **Step 5: Run the full suite**
+
+Run: `flutter test`
+
+Expected: all tests pass.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add lib/main.dart test/app_bootstrap_test.dart
+git commit -m "feat: add retry button to portfolio load failure screen"
+```
+
+---
+
+### Task 5: Write the Firebase migration script
+
+**Files:**
+- Create: `tool/migrate-to-firebase.js`
+- Create: `tool/package.json`
+- Modify: `.gitignore`
+
+**Interfaces:**
+- Consumes: `assets/data/portfolio.json` (existing schema, unchanged), `assets/images/*.webp` (the 4 icons already downloaded in the earlier fix).
+- Produces: `portfolio/meta` doc and `projects/{slug}` docs in Firestore, image files under `projects/{slug}/` in Storage — matching exactly the shape `PortfolioService.load()` (Task 3) expects to read.
+
+- [ ] **Step 1: Add `tool/package.json`**
+
+```json
+{
+  "name": "portfolio-migration-tool",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}
+```
+
+- [ ] **Step 2: Gitignore the service account key**
+
+Add to `.gitignore`:
+
+```
+tool/service-account.json
+```
+
+- [ ] **Step 3: Write the migration script**
+
+Create `tool/migrate-to-firebase.js`:
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+const admin = require('firebase-admin');
+
+const ROOT = path.join(__dirname, '..');
+const serviceAccount = require(path.join(__dirname, 'service-account.json'));
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: `${serviceAccount.project_id}.appspot.com`,
+});
+
+const db = admin.firestore();
+const bucket = admin.storage().bucket();
+
+function fetchBuffer(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        fetchBuffer(res.headers.location).then(resolve, reject);
+        return;
+      }
+      if (res.statusCode !== 200) {
+        reject(new Error(`GET ${url} -> ${res.statusCode}`));
+        return;
+      }
+      const chunks = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+      res.on('error', reject);
+    }).on('error', reject);
+  });
+}
+
+async function uploadImage(slug, label, source) {
+  const destPath = `projects/${slug}/${label}.webp`;
+  const file = bucket.file(destPath);
+
+  let buffer;
+  if (source.startsWith('http')) {
+    buffer = await fetchBuffer(source);
+  } else {
+    buffer = fs.readFileSync(path.join(ROOT, source));
+  }
+
+  await file.save(buffer, { contentType: 'image/webp' });
+  await file.makePublic();
+  return `https://storage.googleapis.com/${bucket.name}/${destPath}`;
+}
+
+const LOCAL_ICONS = {
+  'riise': 'assets/images/riise-icon.webp',
+  'mo-private-wealth': 'assets/images/mo-private-wealth-icon.webp',
+  'mo-trader': 'assets/images/mo-trader-icon.webp',
+  'torus-banking-trading-demat': 'assets/images/torus-icon.webp',
+};
+
+async function migrateProject(project) {
+  const slug = project.slug;
+  console.log(`[${slug}] uploading images...`);
+
+  const iconSource = LOCAL_ICONS[slug] || project.imageUrl;
+  const imageUrl = iconSource ? await uploadImage(slug, 'icon', iconSource) : null;
+
+  const screenshots = [];
+  for (let i = 0; i < project.screenshots.length; i++) {
+    const url = await uploadImage(slug, `screenshot-${i + 1}`, project.screenshots[i]);
+    screenshots.push(url);
+  }
+
+  const migrated = {
+    ...project,
+    imageUrl,
+    screenshots,
+  };
+
+  await db.collection('projects').doc(slug).set(migrated);
+  console.log(`[${slug}] done (${screenshots.length} screenshots)`);
+}
+
+async function main() {
+  const raw = fs.readFileSync(path.join(ROOT, 'assets/data/portfolio.json'), 'utf8');
+  const data = JSON.parse(raw);
+
+  const meta = {
+    personalInfo: data.personalInfo,
+    skills: data.skills,
+    experiences: data.experiences,
+    education: data.education,
+    contactInfo: data.contactInfo,
+  };
+  await db.collection('portfolio').doc('meta').set(meta);
+  console.log('portfolio/meta written');
+
+  for (const project of data.projects) {
+    await migrateProject(project);
+  }
+
+  console.log('Migration complete.');
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
+```
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add tool/migrate-to-firebase.js tool/package.json .gitignore
+git commit -m "chore: add one-time Firebase migration script"
+```
+
+(No automated test for this task — it's a one-time operational script exercised for real in Task 6, against a real Firestore/Storage backend, which is what actually validates it.)
+
+---
+
+### Task 6: Run the migration and verify end-to-end
+
+**Files:** none (operational task)
+
+**Interfaces:**
+- Consumes: `tool/migrate-to-firebase.js` (Task 5), a service account key you provide, the live Firestore/Storage backend (Task 1).
+- Produces: populated Firestore + Storage that the app (Task 3, Task 4) reads on next launch.
+
+- [ ] **Step 1: Generate a service account key**
+
+Go to `https://console.firebase.google.com/project/shubhammemaneportfolio-e4dd0/settings/serviceaccounts/adminsdk`, click "Generate new private key", save the downloaded file as `tool/service-account.json` in this repo.
+
+- [ ] **Step 2: Install migration script dependencies**
+
+Run: `cd tool && npm install && cd ..`
+
+- [ ] **Step 3: Run the migration**
+
+Run: `node tool/migrate-to-firebase.js`
+
+Expected: log lines for `portfolio/meta written`, then one `[slug] done (N screenshots)` line per project (5 total), ending with `Migration complete.`
+
+- [ ] **Step 4: Spot-check Firestore in console**
+
+Open `https://console.firebase.google.com/project/shubhammemaneportfolio-e4dd0/firestore/data`, confirm `portfolio/meta` doc exists with `personalInfo.name` populated, and `projects` collection has 5 documents (`riise`, `mo-private-wealth`, `mo-trader`, `weather-app`, `torus-banking-trading-demat`).
+
+- [ ] **Step 5: Run the app against live Firestore**
+
+Run: `flutter run -d chrome`
+
+Expected: app loads without the "Failed to load portfolio" screen, all 5 projects visible on the home/projects section, and opening a project detail page shows its icon with no 429 in the DevTools console.
+
+- [ ] **Step 6: Delete the local service account key reference check**
+
+Run: `git status --porcelain tool/service-account.json`
+
+Expected: no output (confirms `.gitignore` from Task 5 is keeping it untracked).
+
+- [ ] **Step 7: Final commit (if any stray files need adding, e.g. `pubspec.lock` updates)**
+
+```bash
+git status
+git add -A
+git commit -m "chore: complete Firebase portfolio migration" --allow-empty
+```
