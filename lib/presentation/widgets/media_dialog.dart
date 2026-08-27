@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-import 'dart:ui_web' as ui_web;
+// Conditional imports: use stub on non-web platforms, real libs on web
+import '../../stubs/dart_html_stub.dart' as html
+    if (dart.library.html) 'dart:html';
+import '../../stubs/dart_ui_web_stub.dart' as ui_web
+    if (dart.library.html) 'dart:ui_web';
 import '../../core/theme/app_theme.dart';
 
 // ─── Change this to switch popup style ───────────────────────────────────────
@@ -50,6 +54,7 @@ void showMediaDialog({
 final _registeredViewIds = <String>{};
 
 void _registerVideoView(String viewId, String url) {
+  if (!kIsWeb) return; // Only register on web platform
   if (_registeredViewIds.contains(viewId)) return;
   _registeredViewIds.add(viewId);
   ui_web.platformViewRegistry.registerViewFactory(viewId, (_) {

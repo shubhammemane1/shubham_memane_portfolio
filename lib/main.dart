@@ -9,15 +9,63 @@ import 'domain/models/portfolio_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  try {
-    final data = await PortfolioService.load();
-    runApp(MyApp(portfolioData: data));
-  } catch (e) {
-    runApp(MaterialApp(
-      home: Scaffold(
-        body: Center(child: Text('Failed to load portfolio: $e')),
-      ),
-    ));
+  runApp(PortfolioBootstrap());
+}
+
+class PortfolioBootstrap extends StatefulWidget {
+  final Future<PortfolioData> Function() loader;
+
+  PortfolioBootstrap({super.key, Future<PortfolioData> Function()? loader})
+      : loader = loader ?? PortfolioService.load;
+
+  @override
+  State<PortfolioBootstrap> createState() => _PortfolioBootstrapState();
+}
+
+class _PortfolioBootstrapState extends State<PortfolioBootstrap> {
+  late Future<PortfolioData> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = widget.loader();
+  }
+
+  void _retry() {
+    setState(() {
+      _future = widget.loader();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<PortfolioData>(
+      future: _future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const MaterialApp(
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          );
+        }
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Failed to load portfolio: ${snapshot.error}'),
+                    const SizedBox(height: 16),
+                    ElevatedButton(onPressed: _retry, child: const Text('Retry')),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        return MyApp(portfolioData: snapshot.data!);
+      },
+    );
   }
 }
 
