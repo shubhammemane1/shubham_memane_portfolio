@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/theme/app_theme.dart';
 import '../../domain/models/portfolio_data.dart';
 import '../widgets/media_section.dart';
-import '../widgets/project_icon_button.dart';
 
 class ProjectDetailPage extends StatefulWidget {
   final Project project;
@@ -17,8 +17,7 @@ class ProjectDetailPage extends StatefulWidget {
 }
 
 class _ProjectDetailPageState extends State<ProjectDetailPage> {
-  Color _gradientStart = AppColors.primary;
-  Color _gradientEnd = AppColors.accent;
+  Color _gradientStart = AppColors.secondary;
 
   static const _fakeStats = <String, (String, String, String)>{
     'riise':                       ('Finance',      '500K+', '4.7'),
@@ -55,8 +54,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
       final muted = gen.mutedColor?.color ?? gen.vibrantColor?.color;
       if (dominant != null) {
         setState(() {
-          _gradientStart = dominant;
-          _gradientEnd = muted ?? dominant.withValues(alpha: 0.6);
+          _gradientStart = muted ?? dominant;
         });
       }
     } catch (_) {}
@@ -80,23 +78,20 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _Header(
+            _EditorialHero(
               project: widget.project,
-              gradientStart: _gradientStart,
-              gradientEnd: _gradientEnd,
-            ),
-            _ActionBar(
-              project: widget.project,
+              tintColor: _gradientStart,
               category: category,
               downloads: downloads,
               rating: rating,
-              onLaunch: _launch,
             ),
+            _LinksBar(project: widget.project, onLaunch: _launch),
             if (widget.project.screenshots.isNotEmpty || widget.project.videos.isNotEmpty)
               MediaSection(
                 screenshots: widget.project.screenshots,
                 videos: widget.project.videos,
               ),
+            _QuoteSection(text: widget.project.description),
             _AboutSection(
               text: widget.project.longDescription ?? widget.project.description,
             ),
@@ -109,37 +104,73 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
   }
 }
 
-class _Header extends StatelessWidget {
+class _EditorialHero extends StatelessWidget {
   final Project project;
-  final Color gradientStart;
-  final Color gradientEnd;
+  final Color tintColor;
+  final String category;
+  final String downloads;
+  final String rating;
 
-  const _Header({
+  const _EditorialHero({
     required this.project,
-    required this.gradientStart,
-    required this.gradientEnd,
+    required this.tintColor,
+    required this.category,
+    required this.downloads,
+    required this.rating,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 280,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            gradientStart.withValues(alpha: 0.9),
-            gradientEnd.withValues(alpha: 0.9),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
+      height: 440,
+      color: AppColors.darkSurface,
       child: Stack(
+        fit: StackFit.expand,
         children: [
+          Center(
+            child: Hero(
+              tag: 'project-icon-${project.slug}',
+              child: project.imageUrl != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: project.imageUrl!.startsWith('http')
+                          ? CachedNetworkImage(
+                              imageUrl: project.imageUrl!,
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                              errorWidget: (context, url, error) =>
+                                  _IconFallback(icon: project.icon),
+                            )
+                          : Image.asset(
+                              project.imageUrl!,
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  _IconFallback(icon: project.icon),
+                            ),
+                    )
+                  : _IconFallback(icon: project.icon),
+            ),
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  tintColor.withValues(alpha: 0.3),
+                  Colors.black.withValues(alpha: 0.95),
+                ],
+                stops: const [0.0, 0.85],
+              ),
+            ),
+          ),
           Positioned(
-            top: 16,
-            left: 16,
+            top: 0,
+            left: 0,
             child: SafeArea(
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -147,62 +178,45 @@ class _Header extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 40),
-                Hero(
-                  tag: 'project-icon-${project.slug}',
-                  child: project.imageUrl != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(22),
-                          child: project.imageUrl!.startsWith('http')
-                              ? Image.network(
-                                  project.imageUrl!,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, _, _) =>
-                                      _IconFallback(icon: project.icon),
-                                )
-                              : Image.asset(
-                                  project.imageUrl!,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, _, _) =>
-                                      _IconFallback(icon: project.icon),
-                                ),
-                        )
-                      : _IconFallback(icon: project.icon),
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                  child: Text(
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: AppSpacing.xl,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'CASE STUDY · ${category.toUpperCase()}',
+                    style: const TextStyle(
+                      color: AppColors.accent,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
                     project.title,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
+                          height: 1.05,
                         ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxxl),
-                  child: Text(
-                    project.description,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.85),
-                        ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  const SizedBox(height: AppSpacing.lg),
+                  Row(
+                    children: [
+                      _MetaStat(value: downloads, label: 'downloads'),
+                      const SizedBox(width: AppSpacing.xl),
+                      _MetaStat(value: rating, label: 'rating'),
+                      const SizedBox(width: AppSpacing.xl),
+                      _MetaStat(value: category, label: 'category'),
+                    ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -211,23 +225,53 @@ class _Header extends StatelessWidget {
   }
 }
 
+class _MetaStat extends StatelessWidget {
+  final String value;
+  final String label;
+  const _MetaStat({required this.value, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.secondary,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.6),
+            fontSize: 13,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _IconFallback extends StatelessWidget {
-  final IconData? icon;
+  final FaIconData? icon;
   const _IconFallback({this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: 200,
+      height: 200,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(22),
-        color: Colors.white.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(28),
+        color: Colors.white.withValues(alpha: 0.08),
       ),
       child: Center(
         child: FaIcon(
           icon ?? FontAwesomeIcons.code,
-          size: 48,
+          size: 72,
           color: Colors.white.withValues(alpha: 0.9),
         ),
       ),
@@ -235,62 +279,102 @@ class _IconFallback extends StatelessWidget {
   }
 }
 
-class _ActionBar extends StatelessWidget {
+class _LinksBar extends StatelessWidget {
   final Project project;
-  final String category;
-  final String downloads;
-  final String rating;
   final void Function(String) onLaunch;
 
-  const _ActionBar({
-    required this.project,
-    required this.category,
-    required this.downloads,
-    required this.rating,
-    required this.onLaunch,
-  });
+  const _LinksBar({required this.project, required this.onLaunch});
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final links = <(String, String)>[
+      if (project.githubUrl != null) ('GitHub', project.githubUrl!),
+      if (project.liveUrl != null) ('Live Demo', project.liveUrl!),
+      if (project.playStoreUrl != null) ('Play Store', project.playStoreUrl!),
+      if (project.appStoreUrl != null) ('App Store', project.appStoreUrl!),
+    ];
     return Container(
       width: double.infinity,
       color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
       padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg, vertical: AppSpacing.md),
       child: Wrap(
-        spacing: AppSpacing.sm,
-        runSpacing: AppSpacing.sm,
         alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          if (project.githubUrl != null)
-            ProjectIconButton(
-              icon: FontAwesomeIcons.github,
-              tooltip: 'GitHub',
-              onTap: () => onLaunch(project.githubUrl!),
+          for (var i = 0; i < links.length; i++) ...[
+            if (i > 0)
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+                child: Text('·',
+                    style: TextStyle(
+                        color: AppColors.secondary.withValues(alpha: 0.4),
+                        fontSize: 14)),
+              ),
+            _LinkText(
+              label: links[i].$1,
+              onTap: () => onLaunch(links[i].$2),
             ),
-          if (project.liveUrl != null)
-            ProjectIconButton(
-              icon: FontAwesomeIcons.arrowUpRightFromSquare,
-              tooltip: 'Live Demo',
-              onTap: () => onLaunch(project.liveUrl!),
-            ),
-          if (project.playStoreUrl != null)
-            ProjectIconButton(
-              icon: FontAwesomeIcons.googlePlay,
-              tooltip: 'Play Store',
-              onTap: () => onLaunch(project.playStoreUrl!),
-            ),
-          if (project.appStoreUrl != null)
-            ProjectIconButton(
-              icon: FontAwesomeIcons.appStoreIos,
-              tooltip: 'App Store',
-              onTap: () => onLaunch(project.appStoreUrl!),
-            ),
-          _StatChip(label: '$rating ★'),
-          _StatChip(label: downloads),
-          _StatChip(label: category),
+          ],
         ],
+      ),
+    );
+  }
+}
+
+class _LinkText extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+
+  const _LinkText({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Text(
+        label,
+        style: const TextStyle(
+            color: AppColors.secondary,
+            fontSize: 14,
+            fontWeight: FontWeight.w500),
+      ),
+    );
+  }
+}
+
+class _QuoteSection extends StatelessWidget {
+  final String text;
+  const _QuoteSection({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg, AppSpacing.xl, AppSpacing.lg, 0),
+      child: Container(
+        padding: const EdgeInsets.only(left: AppSpacing.md),
+        decoration: const BoxDecoration(
+          border: Border(
+            left: BorderSide(color: AppColors.secondary, width: 3),
+          ),
+        ),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontFamily:
+                    Theme.of(context).textTheme.headlineSmall?.fontFamily,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w300,
+                height: 1.6,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.lightTextSecondary,
+              ),
+        ),
       ),
     );
   }
@@ -309,7 +393,7 @@ class _AboutSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('About this project',
+          Text('About',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
@@ -342,29 +426,36 @@ class _TechSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Technologies',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold)),
+          Text('TECHNOLOGIES',
+              style: TextStyle(
+                  color: AppColors.accent,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2)),
           const SizedBox(height: AppSpacing.md),
           Wrap(
-            spacing: AppSpacing.sm,
+            spacing: AppSpacing.md,
             runSpacing: AppSpacing.sm,
             children: technologies.map((tech) {
-              return Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(AppRadius.sm),
-                ),
-                child: Text(
-                  tech,
+              return RichText(
+                text: TextSpan(
                   style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500),
+                      fontFamily: 'monospace', fontSize: 13),
+                  children: [
+                    TextSpan(
+                        text: '[ ',
+                        style: TextStyle(
+                            color: AppColors.secondary.withValues(alpha: 0.4))),
+                    TextSpan(
+                        text: tech,
+                        style: const TextStyle(
+                            color: AppColors.secondary,
+                            fontWeight: FontWeight.w500)),
+                    TextSpan(
+                        text: ' ]',
+                        style: TextStyle(
+                            color: AppColors.secondary.withValues(alpha: 0.4))),
+                  ],
                 ),
               );
             }).toList(),
@@ -390,31 +481,6 @@ class _Footer extends StatelessWidget {
           label: const Text('Back to Portfolio'),
           style: TextButton.styleFrom(foregroundColor: AppColors.primary),
         ),
-      ),
-    );
-  }
-}
-
-class _StatChip extends StatelessWidget {
-  final String label;
-  const _StatChip({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-      decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-            color: AppColors.primary,
-            fontSize: 12,
-            fontWeight: FontWeight.w600),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PortfolioData {
@@ -81,7 +80,7 @@ class Project {
   final String? githubUrl;
   final String? playStoreUrl;
   final String? appStoreUrl;
-  final IconData? icon;
+  final FaIconData? icon;
   final String slug;
   final List<String> screenshots;
   final List<String> videos;
@@ -135,7 +134,7 @@ class Project {
         .replaceAll(RegExp(r'^-|-$'), '');
   }
 
-  static IconData? _iconFromString(String? name) {
+  static FaIconData? _iconFromString(String? name) {
     switch (name) {
       case 'cartShopping':  return FontAwesomeIcons.cartShopping;
       case 'listCheck':     return FontAwesomeIcons.listCheck;

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+enum FontVariant { michroma, bricolage }
+
 class AppTheme {
+  static const FontVariant fontVariant = FontVariant.bricolage;
+
+  static TextStyle get tagFont => fontVariant == FontVariant.michroma
+      ? GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500)
+      : GoogleFonts.spaceMono(fontSize: 12, fontWeight: FontWeight.w500);
+
   static ThemeData lightTheme() {
     return ThemeData(
       useMaterial3: true,
@@ -35,17 +43,24 @@ class AppTheme {
   }
 
   static TextTheme _textTheme(Color color) {
+    final display = fontVariant == FontVariant.michroma
+        ? GoogleFonts.michroma
+        : GoogleFonts.bricolageGrotesque;
+    final body = fontVariant == FontVariant.michroma
+        ? GoogleFonts.inter
+        : GoogleFonts.spaceMono;
+
     return TextTheme(
-      displayLarge: GoogleFonts.poppins(fontSize: 72, fontWeight: FontWeight.bold, color: color),
-      displayMedium: GoogleFonts.poppins(fontSize: 56, fontWeight: FontWeight.bold, color: color),
-      displaySmall: GoogleFonts.poppins(fontSize: 48, fontWeight: FontWeight.bold, color: color),
-      headlineLarge: GoogleFonts.poppins(fontSize: 40, fontWeight: FontWeight.w600, color: color),
-      headlineMedium: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w600, color: color),
-      headlineSmall: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600, color: color),
+      displayLarge: display(fontSize: 72, fontWeight: FontWeight.bold, color: color),
+      displayMedium: display(fontSize: 56, fontWeight: FontWeight.bold, color: color),
+      displaySmall: display(fontSize: 48, fontWeight: FontWeight.bold, color: color),
+      headlineLarge: display(fontSize: 40, fontWeight: FontWeight.w600, color: color),
+      headlineMedium: display(fontSize: 32, fontWeight: FontWeight.w600, color: color),
+      headlineSmall: display(fontSize: 24, fontWeight: FontWeight.w600, color: color),
       titleLarge: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w500, color: color),
       titleMedium: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, color: color),
-      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.normal, color: color),
-      bodyMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.normal, color: color),
+      bodyLarge: body(fontSize: 16, fontWeight: FontWeight.normal, color: color),
+      bodyMedium: body(fontSize: 14, fontWeight: FontWeight.normal, color: color),
     );
   }
 }

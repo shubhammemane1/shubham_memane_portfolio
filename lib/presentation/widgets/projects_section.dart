@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -145,12 +146,12 @@ class _ProjectCardState extends State<_ProjectCard> {
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(22),
                             child: widget.project.imageUrl!.startsWith('http')
-                                ? Image.network(
-                                    widget.project.imageUrl!,
+                                ? CachedNetworkImage(
+                                    imageUrl: widget.project.imageUrl!,
                                     width: 110,
                                     height: 110,
                                     fit: BoxFit.cover,
-                                    errorBuilder: (_, e, s) => _buildGradientFallback(),
+                                    errorWidget: (_, _, _) => _buildGradientFallback(),
                                   )
                                 : Image.asset(
                                     widget.project.imageUrl!,
@@ -211,10 +212,8 @@ class _ProjectCardState extends State<_ProjectCard> {
                           ),
                           child: Text(
                             tech,
-                            style: const TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
+                            style: AppTheme.tagFont
+                                .copyWith(color: AppColors.primary),
                           ),
                         );
                       }).toList(),

@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../core/theme/app_theme.dart';
 
 class ProjectIconButton extends StatelessWidget {
-  final IconData icon;
+  final FaIconData icon;
   final VoidCallback onTap;
   final String? tooltip;
 
