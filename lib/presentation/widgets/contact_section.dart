@@ -56,7 +56,7 @@ class ContactSection extends StatelessWidget {
 }
 
 class _SocialButton extends StatefulWidget {
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final VoidCallback onTap;
 

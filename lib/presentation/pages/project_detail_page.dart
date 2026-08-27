@@ -212,7 +212,7 @@ class _Header extends StatelessWidget {
 }
 
 class _IconFallback extends StatelessWidget {
-  final IconData? icon;
+  final FaIconData? icon;
   const _IconFallback({this.icon});
 
   @override

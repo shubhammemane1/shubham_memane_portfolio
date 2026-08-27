@@ -1,11 +1,22 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/models/portfolio_data.dart';
 
 class PortfolioService {
-  static Future<PortfolioData> load() async {
-    final json = await rootBundle.loadString('assets/data/portfolio.json');
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    return PortfolioData.fromJson(map);
+  static Future<PortfolioData> load({FirebaseFirestore? firestore}) async {
+    final db = firestore ?? FirebaseFirestore.instance;
+
+    final metaSnapshot = await db.collection('portfolio').doc('meta').get();
+    final metaData = metaSnapshot.data();
+    if (metaData == null) {
+      throw StateError('portfolio/meta document not found in Firestore');
+    }
+
+    final projectsSnapshot = await db.collection('projects').get();
+    final projects = projectsSnapshot.docs.map((doc) => doc.data()).toList();
+
+    return PortfolioData.fromJson({
+      ...metaData,
+      'projects': projects,
+    });
   }
 }
