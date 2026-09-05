@@ -7,6 +7,7 @@ class PortfolioData {
   final List<Experience> experiences;
   final List<Education> education;
   final ContactInfo contactInfo;
+  final String? copyrightText;
 
   PortfolioData({
     required this.personalInfo,
@@ -15,6 +16,7 @@ class PortfolioData {
     required this.experiences,
     required this.education,
     required this.contactInfo,
+    this.copyrightText,
   });
 
   factory PortfolioData.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class PortfolioData {
           .map((e) => Education.fromJson(e as Map<String, dynamic>))
           .toList(),
       contactInfo: ContactInfo.fromJson(json['contactInfo'] as Map<String, dynamic>),
+      copyrightText: json['copyrightText'] as String?,
     );
   }
 }
@@ -192,8 +195,9 @@ class ContactInfo {
   final String? linkedin;
   final String? twitter;
   final String? website;
+  final String? resumeUrl;
 
-  ContactInfo({required this.email, this.phone, this.github, this.linkedin, this.twitter, this.website});
+  ContactInfo({required this.email, this.phone, this.github, this.linkedin, this.twitter, this.website, this.resumeUrl});
 
   factory ContactInfo.fromJson(Map<String, dynamic> json) {
     return ContactInfo(
@@ -203,6 +207,7 @@ class ContactInfo {
       linkedin: json['linkedin'] as String?,
       twitter: json['twitter'] as String?,
       website: json['website'] as String?,
+      resumeUrl: json['resumeUrl'] as String?,
     );
   }
 }

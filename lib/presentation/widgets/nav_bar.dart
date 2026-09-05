@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/responsive.dart';
 
@@ -12,6 +13,7 @@ class NavBar extends StatelessWidget {
   final VoidCallback onProjects;
   final VoidCallback onExperience;
   final VoidCallback onContact;
+  final String? resumeUrl;
 
   const NavBar({
     super.key,
@@ -22,7 +24,15 @@ class NavBar extends StatelessWidget {
     required this.onProjects,
     required this.onExperience,
     required this.onContact,
+    this.resumeUrl,
   });
+
+  Future<void> _launchResume() async {
+    final url = resumeUrl;
+    if (url == null || url.isEmpty) return;
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) await launchUrl(uri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +88,27 @@ class NavBar extends StatelessWidget {
                     _NavItem(label: 'Projects', onTap: onProjects),
                     _NavItem(label: 'Experience', onTap: onExperience),
                     _NavItem(label: 'Contact', onTap: onContact),
+                    if (resumeUrl != null && resumeUrl!.isNotEmpty) ...[
+                      const SizedBox(width: AppSpacing.md),
+                      _ResumeButton(onTap: _launchResume),
+                    ],
                     const SizedBox(width: AppSpacing.md),
                     _ThemeToggle(onToggle: onThemeToggle, isDark: isDarkMode),
                   ],
                 )
               else
-                _ThemeToggle(onToggle: onThemeToggle, isDark: isDarkMode),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (resumeUrl != null && resumeUrl!.isNotEmpty)
+                      IconButton(
+                        onPressed: _launchResume,
+                        icon: const FaIcon(FontAwesomeIcons.fileArrowDown, size: 18, color: AppColors.primary),
+                        tooltip: 'Resume',
+                      ),
+                    _ThemeToggle(onToggle: onThemeToggle, isDark: isDarkMode),
+                  ],
+                ),
             ],
           ),
         ),
@@ -123,6 +148,27 @@ class _NavItemState extends State<_NavItem> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ResumeButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const _ResumeButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
+        elevation: 0,
+      ),
+      icon: const FaIcon(FontAwesomeIcons.fileArrowDown, size: 14),
+      label: const Text('Resume', style: TextStyle(fontWeight: FontWeight.w600)),
     );
   }
 }

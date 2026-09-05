@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'core/services/portfolio_service.dart';
@@ -9,6 +10,14 @@ import 'domain/models/portfolio_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Preload web fonts before first paint so text is laid out with its real
+  // metrics up front, instead of a fallback font's — otherwise the
+  // Experience cards can briefly overflow once the real font swaps in and
+  // text rewraps to more lines. Best-effort: never block startup on it.
+  GoogleFonts.inter();
+  GoogleFonts.spaceMono();
+  GoogleFonts.bricolageGrotesque();
+  await GoogleFonts.pendingFonts().timeout(const Duration(seconds: 3)).catchError((_) => const <void>[]);
   runApp(PortfolioBootstrap());
 }
 

@@ -34,6 +34,8 @@ class ContactSection extends StatelessWidget {
             runSpacing: AppSpacing.lg,
             alignment: WrapAlignment.center,
             children: [
+              if (contactInfo.resumeUrl != null && contactInfo.resumeUrl!.isNotEmpty)
+                _SocialButton(icon: FontAwesomeIcons.fileArrowDown, label: 'Resume', onTap: () => _launchUrl(contactInfo.resumeUrl!)),
               _SocialButton(icon: FontAwesomeIcons.envelope, label: 'Email', onTap: () => _launchUrl('mailto:${contactInfo.email}')),
               if (contactInfo.github != null)
                 _SocialButton(icon: FontAwesomeIcons.github, label: 'GitHub', onTap: () => _launchUrl(contactInfo.github!)),

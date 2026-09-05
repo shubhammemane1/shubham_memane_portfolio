@@ -92,6 +92,7 @@ async function main() {
     experiences: data.experiences,
     education: data.education,
     contactInfo: data.contactInfo,
+    copyrightText: data.copyrightText,
   };
   await db.collection('portfolio').doc('meta').set(meta);
   console.log('portfolio/meta written');

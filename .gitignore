@@ -47,3 +47,7 @@ app.*.map.json
 # Firebase migration tooling
 tool/service-account.json
 tool/node_modules/
+
+# Local tool caches
+.tokensave/
+.superpowers/

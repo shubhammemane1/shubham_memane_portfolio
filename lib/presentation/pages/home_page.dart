@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     key: _contactKey,
                     child: ContactSection(contactInfo: widget.portfolioData.contactInfo),
                   ),
-                  const _Footer(),
+                  _Footer(copyrightText: widget.portfolioData.copyrightText),
                 ],
               ),
             ),
@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                 onProjects: () => _scrollTo(_projectsKey),
                 onExperience: () => _scrollTo(_experienceKey),
                 onContact: () => _scrollTo(_contactKey),
+                resumeUrl: widget.portfolioData.contactInfo.resumeUrl,
               ),
             ),
           ],
@@ -127,14 +128,15 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _Footer extends StatelessWidget {
-  const _Footer();
+  final String? copyrightText;
+  const _Footer({this.copyrightText});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       child: Text(
-        '© 2024 Shubham Memane. Built with Flutter',
+        copyrightText ?? '© ${DateTime.now().year} Shubham Memane. Built with Flutter',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey[600]

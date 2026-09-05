@@ -103,36 +103,43 @@ class _TimelineCard extends StatelessWidget {
             // Timeline line and dot
             SizedBox(
               width: 60,
-              child: Column(
+              child: Stack(
                 children: [
-                  // Timeline dot
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.primary, width: 4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withOpacity(0.4),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Snake dotted line
+                  // Snake dotted line (Positioned so it doesn't feed into
+                  // IntrinsicHeight's calculation and starve the card's height)
                   if (!isLast)
-                    Expanded(
+                    Positioned(
+                      top: 20,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
                       child: CustomPaint(
                         painter: _SnakeDottedLinePainter(
                           color: AppColors.primary,
                           isEven: isEven,
                         ),
-                        child: Container(),
                       ),
                     ),
+                  // Timeline dot
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.primary, width: 4),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primary.withOpacity(0.4),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -228,15 +235,17 @@ class _ContentCardState extends State<_ContentCard> {
             const SizedBox(height: AppSpacing.xs),
             // Company
             Row(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.business, size: 16, color: AppColors.primary),
                 const SizedBox(width: AppSpacing.xs),
-                Text(
-                  widget.experience.company,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w600,
+                Flexible(
+                  child: Text(
+                    widget.experience.company,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

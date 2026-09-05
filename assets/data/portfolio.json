@@ -52,7 +52,7 @@
       "title": "MO RIISE: Stocks, IPO & Demat",
       "slug": "riise",
       "description": "All-in-one stock market app for demat, IPO, mutual funds and US stocks by Motilal Oswal. Trusted by 40L+ investors.",
-      "longDescription": "MO RIISE is Motilal Oswal's flagship investment app for stocks, IPO, mutual funds, F&O, and US stocks. Open a 100% paperless demat account in under 15 minutes. Trade 6,000+ stocks on NSE & BSE with ultra-fast execution, multiple order types, and integrated TradingView charts with RSI, MACD, and Bollinger Bands. Apply for IPOs early, invest in 250+ mutual funds, and trade US stocks with fractional shares from $1. Track your entire portfolio including holdings from other brokers via Account Aggregator. Get expert research on 260+ stocks, daily recommendations, and join StoCoMo — the in-app trading community for live market discussions.",
+      "longDescription": "MO RIISE is Motilal Oswal's flagship investment app for stocks, IPO, mutual funds, F&O, and US stocks. Open a 100% paperless demat account in under 15 minutes. Trade 6,000+ stocks on NSE & BSE with ultra-fast execution, multiple order types, and integrated TradingView charts with RSI, MACD, and Bollinger Bands. Apply for IPOs early, invest in 250+ mutual funds, and trade US stocks with fractional shares from $1. Track your entire portfolio including holdings from other brokers via Account Aggregator. Get expert research on 260+ stocks, daily recommendations, and join StoCoMo \u2014 the in-app trading community for live market discussions.",
       "technologies": [
         "Flutter",
         "Firebase",
@@ -82,7 +82,7 @@
       "title": "MO Private Wealth",
       "slug": "mo-private-wealth",
       "description": "Premium wealth management app for high-net-worth investors by Motilal Oswal with personalised advisory and portfolio tracking.",
-      "longDescription": "MO Private Wealth is Motilal Oswal's exclusive app designed for high-net-worth individuals seeking personalised wealth management. Get dedicated relationship manager access, curated investment advisory across equity, debt, and alternative assets, and a comprehensive view of your entire portfolio performance. The app provides detailed analytics, goal-based planning, and secure communication with your wealth advisor — all in one place.",
+      "longDescription": "MO Private Wealth is Motilal Oswal's exclusive app designed for high-net-worth individuals seeking personalised wealth management. Get dedicated relationship manager access, curated investment advisory across equity, debt, and alternative assets, and a comprehensive view of your entire portfolio performance. The app provides detailed analytics, goal-based planning, and secure communication with your wealth advisor \u2014 all in one place.",
       "technologies": [
         "Flutter",
         "Dart",
@@ -108,7 +108,7 @@
       "title": "MO Trader: Stock Trading App",
       "slug": "mo-trader",
       "description": "Fast and powerful stock trading app with real-time market data, advanced charting, and seamless order execution by Motilal Oswal.",
-      "longDescription": "MO Trader is Motilal Oswal's dedicated stock trading app built for active traders. Execute trades in real time across NSE and BSE with advanced order types including market, limit, stop-loss, and bracket orders. Access live market depth, real-time option chains with Greeks, intraday and positional charts, and portfolio P&L tracking. Designed with a high-performance UI that handles rapid data updates with minimal latency — ideal for intraday traders and F&O professionals.",
+      "longDescription": "MO Trader is Motilal Oswal's dedicated stock trading app built for active traders. Execute trades in real time across NSE and BSE with advanced order types including market, limit, stop-loss, and bracket orders. Access live market depth, real-time option chains with Greeks, intraday and positional charts, and portfolio P&L tracking. Designed with a high-performance UI that handles rapid data updates with minimal latency \u2014 ideal for intraday traders and F&O professionals.",
       "technologies": [
         "Flutter",
         "Dart",
@@ -136,25 +136,26 @@
       "downloads": "100K+"
     },
     {
-      "title": "Weather App",
-      "slug": "weather-app",
-      "description": "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
-      "longDescription": "A beautiful weather application built with Flutter using the OpenWeather API for accurate location-based forecasts, 7-day predictions, hourly breakdowns, and severe weather alerts. Google Maps integration shows interactive radar overlays. Features animated weather icons, widget support, and an Apple Watch companion app.",
+      "title": "Enrich Beauty",
+      "slug": "enrich-beauty",
+      "description": "Salon & spa booking app for Enrich \u2014 appointments, tiered memberships, and beauty product delivery across 100+ stores in India.",
+      "longDescription": "Enrich Beauty is the official app for Enrich, India's premier salon and spa chain with over 25 years of experience. Book hair, skin, mani-pedi, and spa appointments at your preferred store and time slot, track membership tier (Classic to Platinum), Enrich Cash, and loyalty points, and share benefits with family members on the same membership. Shop premium beauty products with free delivery, browse active offers sorted by expiry, and find the nearest of 100+ Enrich locations across Mumbai, Bangalore, Ahmedabad, Pune, Surat, Vadodara, and Indore.",
       "technologies": [
-        "Flutter",
-        "OpenWeather API",
-        "Google Maps"
+        "Flutter"
       ],
-      "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/e4/1a/07e41a06-4a4e-ed7c-b0ec-c12ac64e55d7/AppIcon-0-1x_U007emarketing-0-6-0-sRGB-85-220.png/400x400ia-75.webp",
-      "githubUrl": "https://github.com/yourusername/project3",
-      "liveUrl": null,
-      "playStoreUrl": null,
-      "appStoreUrl": "https://apps.apple.com/app/weather/id000000003",
-      "icon": "cloudSunRain",
-      "screenshots": [],
+      "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/45/5b/c6/455bc676-dc2a-23b2-ef67-f2fbe057a5f9/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+      "githubUrl": null,
+      "liveUrl": "https://www.enrichbeauty.com/",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.enrich.salonapp",
+      "appStoreUrl": "https://apps.apple.com/in/app/enrich-beauty/id1351645361",
+      "screenshots": [
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/50/ba/24/50ba248e-04a8-26e9-1b2b-d05006385b15/03d5a9b4-f288-435c-802c-4f64241335e8_App_Store_Mockup_-_iPhone_5.5_1.png/392x696bb.png",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/93/43/89/9343894a-2bc9-7a42-bc77-cc0918ec8f2f/3bbf1244-c816-47ff-82cb-8e22357d8959_App_Store_Mockup_-_iPhone_5.5_2.png/392x696bb.png",
+        "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dc/a1/97/dca1977f-eb02-e762-6caa-d19bff706b18/529ef908-32d3-419d-8b95-2bae2719a6d1_App_Store_Mockup_-_iPhone_5.5_3.png/392x696bb.png"
+      ],
       "videos": [],
-      "rating": 4.6,
-      "downloads": "30K+"
+      "rating": 4.4,
+      "downloads": "100K+"
     },
     {
       "title": "Torus: Banking, Trading, Demat",
@@ -256,6 +257,8 @@
     "github": "https://github.com/shubhammemane",
     "linkedin": "https://linkedin.com/in/shubhammemane",
     "twitter": "https://twitter.com/shubhammemane",
-    "website": null
-  }
+    "website": null,
+    "resumeUrl": null
+  },
+  "copyrightText": "\u00a9 2026 Shubham Memane. Built with Flutter"
 }

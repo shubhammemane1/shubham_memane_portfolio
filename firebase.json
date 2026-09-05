@@ -1,1 +1,1 @@
-{"firestore":{"rules":"firestore.rules"},"storage":{"rules":"storage.rules"},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"shubhammemaneportfolio-e4dd0","configurations":{"web":"1:150183623985:web:7a4e6ebddc269632fcc410"}}}}}}
+{"firestore":{"rules":"firestore.rules"},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"shubhammemaneportfolio-2735d","configurations":{"web":"1:345664985639:web:a52609dbb8dc9a30288c02"}}}}}}
